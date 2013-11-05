@@ -54,6 +54,7 @@ def create_post():
 
     return redirect(url_for("view_post", id=post.id))
 
+
 @app.route("/login")
 def login():
     return render_template("login.html")

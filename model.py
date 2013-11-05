@@ -18,8 +18,12 @@ session = scoped_session(sessionmaker(bind=engine,
 Base = declarative_base()
 Base.query = session.query_property()
 
+
+
+
 class User(Base, UserMixin):
     __tablename__ = "users" 
+
     id = Column(Integer, primary_key=True)
     email = Column(String(64), nullable=False)
     password = Column(String(64), nullable=False)
@@ -35,6 +39,71 @@ class User(Base, UserMixin):
     def authenticate(self, password):
         password = password.encode("utf-8")
         return bcrypt.hashpw(password, self.salt.encode("utf-8")) == self.password
+
+
+# Each plan can have many timelines 
+class Plan(Base):
+    __tablename__ = "plan"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(80))
+    start_date = Column(DateTime)
+    end_date = Column(DateTime)
+
+    def __init__(self, name, start_date, end_date):
+        self.name = name
+        self.start_date = start_date
+        self.end_date = end_date
+
+
+# Each Category has many activities 
+class Category(Base):
+    __tablename__ = "category"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(80))
+    symbol_url = Column(String(80)) 
+
+    def __init__(self, name, symbol_url):
+        self.name = name
+        self.symbol_url = symbol_url
+
+
+# Timeline belongs to plan 
+class Timeline(Base):
+    __tablename__ = "timeline"
+
+    id = Column(Integer, primary_key=True)
+    date = Column(DateTime)
+    timeslot1 = Column(String(80))
+    timeslot2 = Column(String(80))
+    timeslot3 = Column(String(80))
+    timeslot4 = Column(String(80))
+    timeslot5 = Column(String(80))
+
+    def __init__(self, date, timeslot1, timeslot2, timeslot3, timeslot4, timeslot5):
+        self.date = date
+        self.timeslot1 = timeslot1
+        self.timeslot2 = timeslot2
+        self.timeslot3 = timeslot3
+        self.timeslot4 = timeslot4
+        self.timeslot5 = timeslot5
+
+
+# Activity belong to category 
+class Activity(Base):
+    __tablename__ = "activity"
+
+    id = Column(Integer, primary_key=True)
+    title = Column(String(80))
+    photo_url = Column(String(80))
+    description = Column(String(200000))
+
+    def __init__(self, title, photo_url, description):
+        self.title = title
+        self.photo_url = photo_url
+        self.description = description
+
 
 class Post(Base):
     __tablename__ = "posts"
