@@ -1,5 +1,22 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<h2>{{plan.name}} - from {{plan.start_date}} to {{plan.end_date}}</h2>
+<h1>{{plan.name}}</h1>
+<h3>{{plan.start_date|datetime('%B %d')}} to {{plan.end_date|datetime('%B %d, %Y')}}</h3>
+
+{% for timeline_date in plan.date_range() %}
+<div class="panel panel-default">
+    <div class="panel-heading">{{timeline_date|datetime('%B %d')}}</div>
+    <div class="panel-body">
+        <div class="btn-group">
+            <button type="button" class="btn btn-default">?</button>
+            <button type="button" class="btn btn-default">?</button>
+            <button type="button" class="btn btn-default">?</button>
+            <button type="button" class="btn btn-default">?</button>
+            <button type="button" class="btn btn-default">?</button>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
 {% endblock %}

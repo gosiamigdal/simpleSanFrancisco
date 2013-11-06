@@ -5,9 +5,21 @@ from flaskext.markdown import Markdown
 import config
 import forms
 import model
+import datetime
 
 app = Flask(__name__)
 app.config.from_object(config)
+
+def format_datetime(date, fmt='%c'):
+    # check whether the value is a datetime object
+    if not isinstance(date, (datetime.date, datetime.datetime)):
+        try:
+            date = datetime.datetime.strptime(str(date), '%Y-%m-%d').date()
+        except Exception, e:
+            return date
+    return date.strftime(fmt)
+
+app.jinja_env.filters['datetime'] = format_datetime
 
 # Stuff to make login easier
 login_manager = LoginManager()

@@ -3,7 +3,7 @@ import bcrypt
 from datetime import datetime
 
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import create_engine, ForeignKey, UniqueConstraint
+from sqlalchemy import create_engine, ForeignKey
 from sqlalchemy import Column, Integer, String, DateTime, Text
 
 from sqlalchemy.orm import sessionmaker, scoped_session, relationship, backref
@@ -29,7 +29,7 @@ class User(Base, UserMixin):
     password = Column(String(64), nullable=False)
     salt = Column(String(64), nullable=False)
 
-    plans = relationship("Plan", uselist=True)
+    posts = relationship("Post", uselist=True)
 
     def set_password(self, password):
         self.salt = bcrypt.gensalt()
@@ -40,6 +40,18 @@ class User(Base, UserMixin):
         password = password.encode("utf-8")
         return bcrypt.hashpw(password, self.salt.encode("utf-8")) == self.password
 
+class Post(Base):
+    __tablename__ = "posts"
+    
+    id = Column(Integer, primary_key=True)
+    title = Column(String(64), nullable=False)
+    body = Column(Text, nullable=False)
+    created_at = Column(DateTime, nullable=False, default=datetime.now)
+    posted_at = Column(DateTime, nullable=True, default=None)
+    user_id = Column(Integer, ForeignKey("users.id"))
+
+    user = relationship("User")
+
 
 # Each plan can have many timelines 
 class Plan(Base):
@@ -49,10 +61,7 @@ class Plan(Base):
     name = Column(String(80))
     start_date = Column(DateTime)
     end_date = Column(DateTime)
-    created_at = Column(DateTime, nullable=False, default=datetime.now)
-    user_id = Column(Integer, ForeignKey("users.id"))
 
-    user = relationship("User")
     timelines = relationship("Timeline", uselist=True)
 
 
@@ -66,14 +75,16 @@ class Timeline(Base):
 
     plan = relationship("Plan")
     timeline_activities = relationship("TimelineActivity", uselist=True)
+    
 
 
 class TimelineActivity(Base):
     __tablename__ = "timeline_activities"
 
+    id = Column(Integer, primary_key=True, autoincrement=True)
     activity_id = Column(Integer, ForeignKey("activities.id"))
-    timeline_id = Column(Integer, ForeignKey("timelines.id"), primary_key=True)
-    order = Column(Integer, primary_key=True)
+    timeline_id = Column(Integer, ForeignKey("timelines.id"))
+    order = Column(Integer)
 
     timeline = relationship("Timeline")
     activity = relationship("Activity")
@@ -88,10 +99,10 @@ class Activity(Base):
     title = Column(String(80))
     photo_url = Column(String(120))
     description = Column(String(1000))
-    
-    timeline_activities = relationship("TimelineActivity", uselist=True)
     category_id = Column(Integer, ForeignKey("categories.id"))
+    
     category = relationship("Category")
+    timeline_activities = relationship("TimelineActivity", uselist=True)
 
 
 
