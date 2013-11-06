@@ -1,14 +1,8 @@
 {% extends 'base.html' %}
 {% block body %}
-{% for post in posts %}
+{% for plan in plans %}
 <div class="post">
-    <h2><a href="{{url_for("view_post", id=post.id)}}">{{post.title}}</a></h2>
-    <p>
-        {{post.body | markdown}}
-    </p>
+    <h2><a href="{{url_for("view_plan", id=plan.id)}}">{{plan.name}}</a></h2>
 </div>
-{% else %}
-No posts here!
-<a href="{{url_for("new_post")}}">New post</a>
 {% endfor %}
 {% endblock %}

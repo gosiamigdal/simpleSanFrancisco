@@ -6,19 +6,24 @@
         <script type="text/javascript" src="/static/js/jquery-2.0.3.min.js"></script>
     </head>
     <body>
-        <div class="navbar">
-            <div class="navbar-inner">
-                <div class="container">
+        <div class="container">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <a class="brand" href="{{url_for("index")}}">Simple SF</a>
                     <ul class="nav">
-                        <li><a href="{{url_for("index")}}">A Blog</a></li>
-                        <li><a href="{{url_for("new_post")}}">New post</a></li>
-                        <li><a href="{{url_for("login")}}">Login</a></li>
+                        <li><a href="{{url_for("new_plan")}}">New plan</a></li>
+                    </ul>
+
+                    <ul class="nav pull-right">
+                        <li><a href="#">{{current_user.email}}</a></li>
+                        {% if current_user.is_authenticated() %}
+                            <li><a href="{{url_for("logout")}}">Logout</a></li>
+                        {% else %}
+                            <li><a href="{{url_for("login")}}">Login</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
-        </div>
-        <div class="container">
-            <h1>A Blog</h1>
             <ul>
             {% for message in get_flashed_messages() %}
             <li>{{message}}</li>

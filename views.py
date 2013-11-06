@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, request, g, session, url_for, flash
-from model import User, Post
-from flask.ext.login import LoginManager, login_required, login_user, current_user
+from model import User, Plan
+from flask.ext.login import LoginManager, login_required, login_user, current_user, logout_user
 from flaskext.markdown import Markdown
 import config
 import forms
@@ -25,34 +25,34 @@ Markdown(app)
 
 @app.route("/")
 def index():
-    posts = Post.query.all()
-    return render_template("index.html", posts=posts)
+    plans = Plan.query.all()
+    return render_template("index.html", plans=plans)
 
-@app.route("/post/<int:id>")
-def view_post(id):
-    post = Post.query.get(id)
-    return render_template("post.html", post=post)
+@app.route("/plan/<int:id>")
+def view_plan(id):
+    plan = Plan.query.get(id)
+    return render_template("plan.html", plan=plan)
 
-@app.route("/post/new")
+@app.route("/plan/new")
 @login_required
-def new_post():
-    return render_template("new_post.html")
+def new_plan():
+    return render_template("new_plan.html")
 
-@app.route("/post/new", methods=["POST"])
+@app.route("/plan/new", methods=["POST"])
 @login_required
-def create_post():
-    form = forms.NewPostForm(request.form)
+def create_plan():
+    form = forms.NewPlanForm(request.form)
     if not form.validate():
         flash("Error, all fields are required")
-        return render_template("new_post.html")
+        return render_template("new_plan.html")
 
-    post = Post(title=form.title.data, body=form.body.data)
-    current_user.posts.append(post) 
+    plan = Plan(name=form.name.data, start_date=form.start_date.data, end_date=form.end_date.data)
+    current_user.plans.append(plan) 
     
     model.session.commit()
-    model.session.refresh(post)
+    model.session.refresh(plan)
 
-    return redirect(url_for("view_post", id=post.id))
+    return redirect(url_for("view_plan", id=plan.id))
 
 
 @app.route("/login")
@@ -77,6 +77,12 @@ def authenticate():
 
     login_user(user)
     return redirect(request.args.get("next", url_for("index")))
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("index"))
 
 
 if __name__ == "__main__":
