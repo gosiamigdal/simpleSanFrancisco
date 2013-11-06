@@ -45,12 +45,13 @@ class User(Base, UserMixin):
 class Plan(Base):
     __tablename__ = "plan"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, autoincrement=True)
     name = Column(String(80))
     start_date = Column(DateTime)
     end_date = Column(DateTime)
 
-    def __init__(self, name, start_date, end_date):
+    def __init__(self, name, start_date, end_date,id):
+        self.id = id
         self.name = name
         self.start_date = start_date
         self.end_date = end_date
@@ -60,11 +61,12 @@ class Plan(Base):
 class Category(Base):
     __tablename__ = "category"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, autoincrement=True)
     name = Column(String(80))
-    symbol_url = Column(String(80)) 
+    symbol_url = Column(String(100)) 
 
-    def __init__(self, name, symbol_url):
+    def __init__(self, name, symbol_url,id):
+        self.id = id
         self.name = name
         self.symbol_url = symbol_url
 
@@ -73,7 +75,7 @@ class Category(Base):
 class Timeline(Base):
     __tablename__ = "timeline"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, autoincrement=True)
     date = Column(DateTime)
     timeslot1 = Column(String(80))
     timeslot2 = Column(String(80))
@@ -81,7 +83,8 @@ class Timeline(Base):
     timeslot4 = Column(String(80))
     timeslot5 = Column(String(80))
 
-    def __init__(self, date, timeslot1, timeslot2, timeslot3, timeslot4, timeslot5):
+    def __init__(self, id, date, timeslot1, timeslot2, timeslot3, timeslot4, timeslot5):
+        self.id = id
         self.date = date
         self.timeslot1 = timeslot1
         self.timeslot2 = timeslot2
@@ -94,15 +97,18 @@ class Timeline(Base):
 class Activity(Base):
     __tablename__ = "activity"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, autoincrement=True)
     title = Column(String(80))
-    photo_url = Column(String(80))
+    photo_url = Column(String(100))
     description = Column(String(200000))
+    category = Column(String(80))  # NOT SURE
 
-    def __init__(self, title, photo_url, description):
+    def __init__(self, id, title, photo_url, description):
+        self.id = id
         self.title = title
         self.photo_url = photo_url
         self.description = description
+        self.category = category # NOT SURE
 
 
 class Post(Base):
@@ -120,12 +126,17 @@ class Post(Base):
 
 def create_tables():
     Base.metadata.create_all(engine)
+    """
     u = User(email="test@test.com")
     u.set_password("unicorn")
     session.add(u)
     p = Post(title="This is a test post", body="This is the body of a test post.")
     u.posts.append(p)
     session.commit()
+    """
 
 if __name__ == "__main__":
     create_tables()
+
+
+
