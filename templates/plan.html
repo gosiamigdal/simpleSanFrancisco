@@ -8,13 +8,17 @@
 <div class="panel panel-default">
     <div class="panel-heading">{{timeline_date|datetime('%B %d')}}</div>
     <div class="panel-body">
-        <div class="btn-group">
+        <div class="plan-buttons btn-group">
             <button type="button" class="btn btn-default button-10am">10am-12pm</button>
             <button type="button" class="btn btn-default button-12pm">12pm-2pm</button>
             <button type="button" class="btn btn-default button-2pm">2pm-4pm</button>
             <button type="button" class="btn btn-default button-4pm">4pm-6pm</button>
             <button type="button" class="btn btn-default button-6pm">6pm-8pm</button>
         </div>
+        <div class="plan-categories">
+            <p>categories</p>
+        </div>
+
     </div>
 </div>
 {% endfor %}
