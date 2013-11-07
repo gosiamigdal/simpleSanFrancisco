@@ -4,16 +4,23 @@
 <h1>{{plan.name}}</h1>
 <h3>{{plan.start_date|datetime('%B %d')}} to {{plan.end_date|datetime('%B %d, %Y')}}</h3>
 
-{% for timeline_date in plan.date_range() %}
+{% for timeline_date in range(plan.date_range()) %}
 <div class="panel panel-default">
     <div class="panel-heading">{{timeline_date|datetime('%B %d')}}</div>
     <div class="panel-body">
         <div class="btn-group">
-            <button type="button" class="btn btn-default">?</button>
-            <button type="button" class="btn btn-default">?</button>
-            <button type="button" class="btn btn-default">?</button>
-            <button type="button" class="btn btn-default">?</button>
-            <button type="button" class="btn btn-default">?</button>
+            <form action="/categories_display">
+                <input type="submit" value="10am-12pm">
+                <input type="submit" value="12pm-2pm">
+                <input type="submit" value="2pm-4pm">
+                <input type="submit" value="4pm-6pm">
+                <input type="submit" value="6pm-8pm">
+            </form>
+            <button type="button" class="btn btn-default">10am-12pm</button>
+            <button type="button" class="btn btn-default">12pm-2pm</button>
+            <button type="button" class="btn btn-default">2pm-4pm</button>
+            <button type="button" class="btn btn-default">4pm-6pm</button>
+            <button type="button" class="btn btn-default">6pm-8pm</button>
         </div>
     </div>
 </div>

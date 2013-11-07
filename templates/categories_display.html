@@ -1,0 +1,14 @@
+{ % extends 'base.html' %}
+
+{% block body %}
+<h1>{{plan.name}}</h1>
+{% for category_name in Category %}
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="btn-group">
+            <button type="button" class="btn btn-default">{{Category.name}}</button>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

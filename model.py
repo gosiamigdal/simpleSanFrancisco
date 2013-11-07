@@ -1,6 +1,6 @@
 import config
 import bcrypt
-from datetime import datetime
+from datetime import datetime, date, timedelta
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine, ForeignKey
@@ -29,7 +29,7 @@ class User(Base, UserMixin):
     password = Column(String(64), nullable=False)
     salt = Column(String(64), nullable=False)
 
-    posts = relationship("Post", uselist=True)
+
 
     def set_password(self, password):
         self.salt = bcrypt.gensalt()
@@ -40,18 +40,6 @@ class User(Base, UserMixin):
         password = password.encode("utf-8")
         return bcrypt.hashpw(password, self.salt.encode("utf-8")) == self.password
 
-class Post(Base):
-    __tablename__ = "posts"
-    
-    id = Column(Integer, primary_key=True)
-    title = Column(String(64), nullable=False)
-    body = Column(Text, nullable=False)
-    created_at = Column(DateTime, nullable=False, default=datetime.now)
-    posted_at = Column(DateTime, nullable=True, default=None)
-    user_id = Column(Integer, ForeignKey("users.id"))
-
-    user = relationship("User")
-
 
 # Each plan can have many timelines 
 class Plan(Base):
@@ -61,8 +49,15 @@ class Plan(Base):
     name = Column(String(80))
     start_date = Column(DateTime)
     end_date = Column(DateTime)
+    user_id = Column(Integer, ForeignKey("users.id"))
 
+    user = relationship("User",backref="plans")
     timelines = relationship("Timeline", uselist=True)
+
+    def date_range(self):
+        delta = self.end_date - self.start_date
+        return delta.days
+
 
 
 # Timeline belongs to plan 
@@ -114,9 +109,18 @@ class Category(Base):
     id = Column(Integer,primary_key=True, autoincrement=True)
     name = Column(String(80))
     symbol_url = Column(String(120))
-
+    #time_string = Column(String(40))
     activities = relationship("Activity", uselist=True) 
 
+    def suitable_time(self, time):
+        #time looks like this : "10-12"
+        #split the time_string so it looks like this : ["10-12", "12-2"]
+        #if the time we've asked about is in the time_string array that we just split
+        #if time in time_list:
+            #return true
+        #else
+            #return false
+            pass
 
 
 def create_tables():

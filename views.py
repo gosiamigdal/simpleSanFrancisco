@@ -71,6 +71,7 @@ def create_plan():
 def login():
     return render_template("login.html")
 
+
 @app.route("/login", methods=["POST"])
 def authenticate():
     form = forms.LoginForm(request.form)
@@ -96,6 +97,10 @@ def logout():
     logout_user()
     return redirect(url_for("index"))
 
+@app.route("/categories_display")
+#@login_required
+def display_all_categories():
+    return redirect(url_for("categories_display"))
 
 if __name__ == "__main__":
     app.run(debug=True)
