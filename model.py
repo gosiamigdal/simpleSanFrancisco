@@ -55,8 +55,12 @@ class Plan(Base):
     timelines = relationship("Timeline", uselist=True)
 
     def date_range(self):
-        delta = self.end_date - self.start_date
-        return delta.days
+        result = []
+        current = self.start_date
+        while current <= self.end_date:
+            result.append(current)
+            current = current + timedelta(days=1)
+        return result
 
 
 
