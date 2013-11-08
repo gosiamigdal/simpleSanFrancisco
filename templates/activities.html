@@ -2,7 +2,7 @@
 
 {% block body %}
 <h1>{{plan.name}}</h1>
-<h3>{{category.name}}</h3>
+<h3>{{category.name}} at {{timeslots[order]}}</h3>
 {% for activity in category.activities%}
 <div class="row activity">
   <div class="col-md-3 photo">
