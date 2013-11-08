@@ -17,8 +17,9 @@ def load_activities(session):
     with open("seed_data/u.activities") as csvfile:
         activities = csv.reader(csvfile,delimiter="|")
         for activity in activities:
-            new_activity = model.Activity(id=activity[0], title=activity[1], photo_url=activity[2], description=activity[3])
-            session.add(new_activity)
+            for category in model.Category.query.all():
+                new_activity = model.Activity(title=activity[1], photo_url=activity[2], description=activity[3],category_id=category.id)
+                session.add(new_activity)
     session.commit()
 
 def create_users(session):

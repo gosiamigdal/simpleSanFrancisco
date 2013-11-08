@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, request, g, session, url_for, flash
-from model import User, Plan, Activity
+from model import User, Plan, Activity, Category
 from flask.ext.login import LoginManager, login_required, login_user, current_user, logout_user
 from flaskext.markdown import Markdown
 import config
@@ -9,6 +9,8 @@ import datetime
 
 app = Flask(__name__)
 app.config.from_object(config)
+
+timeslots = {0:"10am", 1:"12pm", 2:"2pm", 3:"4pm",4:"6pm"}
 
 def format_datetime(date, fmt='%c'):
     # check whether the value is a datetime object
@@ -43,7 +45,7 @@ def index():
 @app.route("/plan/<int:id>")
 def view_plan(id):
     plan = Plan.query.get(id)
-    return render_template("plan.html", plan=plan)
+    return render_template("plan.html", plan=plan,timeslots=timeslots)
 
 @app.route("/plan/new")
 @login_required
@@ -98,14 +100,19 @@ def logout():
     return redirect(url_for("index"))
 
 
-@app.route("/categories_display/<category_id>")
+@app.route("/plan/<int:plan_id>/timeslot/<int:order>/category/<int:category_id>")
 @login_required
-def display_activities_for_category(category_id):
-    activity = session.query(Activity).filter_by(category_id=5).all()
-    # return render_template("categories_display.html",category_name=category_id)
-    return activity
-
-
+def activities_for_timeslot(plan_id,order,category_id):
+    category = Category.query.get(category_id)
+    plan = Plan.query.get(plan_id)
+    return render_template("activities.html", category=category)
+ 
+    
+@app.route("/plan/<int:plan_id>/timeslot/<int:order>")
+def categories_for_timeslot(plan_id,order):
+    categories = Category.query.all()
+    plan = Plan.query.get(plan_id)
+    return render_template("categories.html",categories=categories,plan=plan,order=order,timeslots=timeslots)
 
 if __name__ == "__main__":
     app.run(debug=True)

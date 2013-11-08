@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block body %}
+{{category.id}}
+
+{% for activity in category.activities%}
+    {{activity.title}}
+    
+{% endfor %}
+{% endblock %}

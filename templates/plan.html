@@ -8,23 +8,12 @@
     <div class="panel-heading">{{timeline_date|datetime('%B %d')}}</div>
     <div class="panel-body">
         <div class="plan-buttons btn-group">
-            <button type="button" class="btn btn-default button-10am">10am-12pm</button>
-            <button type="button" class="btn btn-default button-12pm">12pm-2pm</button>
-            <button type="button" class="btn btn-default button-2pm">2pm-4pm</button>
-            <button type="button" class="btn btn-default button-4pm">4pm-6pm</button>
-            <button type="button" class="btn btn-default button-6pm">6pm-8pm</button>
-        </div>
-
-        <div class="plan-categories btn-group">
-            <FORM ACTION={{url_for("display_activities_for_category", category_id=5)}}>
-                <INPUT TYPE="submit" VALUE="Visit landmark">
-            </FORM>
-            <button method="get" type="button" class="btn btn-default button-Visit-museum">Visit landmark</button>
-
-            <button method="get" type="button" class="btn btn-default button-Eat">Visit museum</button>
-            
+            {% for order, time in timeslots.iteritems() %}
+                <a href="{{url_for("categories_for_timeslot", plan_id=plan.id, order=order)}}" class="btn btn-default a-10am">{{time}}</a>
+                {% endfor %}
         </div>
     </div>
+
 </div>
 {% endfor %}
 {% endblock %}

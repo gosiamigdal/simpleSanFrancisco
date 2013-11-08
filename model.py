@@ -49,7 +49,7 @@ class Plan(Base):
     name = Column(String(80))
     start_date = Column(DateTime)
     end_date = Column(DateTime)
-    user_id = Column(Integer, ForeignKey("users.id"))
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
 
     user = relationship("User",backref="plans")
     timelines = relationship("Timeline", uselist=True)
@@ -70,7 +70,7 @@ class Timeline(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     date = Column(DateTime)
-    plan_id = Column(Integer, ForeignKey("plans.id"))
+    plan_id = Column(Integer, ForeignKey("plans.id"),nullable=False)
 
     plan = relationship("Plan")
     timeline_activities = relationship("TimelineActivity", uselist=True)
@@ -81,8 +81,8 @@ class TimelineActivity(Base):
     __tablename__ = "timeline_activities"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    activity_id = Column(Integer, ForeignKey("activities.id"))
-    timeline_id = Column(Integer, ForeignKey("timelines.id"))
+    activity_id = Column(Integer, ForeignKey("activities.id"),nullable=False)
+    timeline_id = Column(Integer, ForeignKey("timelines.id"),nullable=False)
     order = Column(Integer)
 
     timeline = relationship("Timeline")
@@ -98,7 +98,7 @@ class Activity(Base):
     title = Column(String(80))
     photo_url = Column(String(120))
     description = Column(String(1000))
-    category_id = Column(Integer, ForeignKey("categories.id"))
+    category_id = Column(Integer, ForeignKey("categories.id"),nullable=False)
     
     category = relationship("Category")
 
