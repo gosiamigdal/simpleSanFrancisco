@@ -105,9 +105,9 @@ def logout():
 def activities_for_timeslot(plan_id,order,category_id):
     category = Category.query.get(category_id)
     plan = Plan.query.get(plan_id)
-    return render_template("activities.html", category=category)
+    return render_template("activities.html", category=category,plan=plan)
  
-    
+
 @app.route("/plan/<int:plan_id>/timeslot/<int:order>")
 def categories_for_timeslot(plan_id,order):
     categories = Category.query.all()

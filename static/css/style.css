@@ -5,3 +5,25 @@
 .toggled {
     background-color: lightblue; 
 }
+
+.activity {
+    margin-top:40px;
+    display:block;
+}
+
+.activity .photo {
+    max-height: 140px;
+    overflow-y: hidden;
+}
+
+.activity img {
+    max-width:100%
+}
+
+.activity .title {
+    line-height: 1;
+}
+
+.activity .body {
+    color: #333;
+}

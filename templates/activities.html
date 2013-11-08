@@ -1,10 +1,17 @@
 {% extends 'base.html' %}
 
 {% block body %}
-{{category.id}}
-
+<h1>{{plan.name}}</h1>
+<h3>{{category.name}}</h3>
 {% for activity in category.activities%}
-    {{activity.title}}
-    
+<div class="row activity">
+  <div class="col-md-3 photo">
+    <img src="{{activity.photo_url}}">
+  </div>
+  <div class="col-md-9 body">
+    <p class="lead title">{{activity.title}} <a href="#" class="btn btn-success"><span class="glyphicon glyphicon-time"></span> Plan this</a></p>
+    <p>{{activity.description}}</p>
+  </div>
+</div>
 {% endfor %}
 {% endblock %}
