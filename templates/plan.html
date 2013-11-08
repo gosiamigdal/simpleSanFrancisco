@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block body %}
 <h1>{{plan.name}}</h1>
 <h3>{{plan.start_date|datetime('%B %d')}} to {{plan.end_date|datetime('%B %d, %Y')}}</h3>
@@ -15,12 +14,17 @@
             <button type="button" class="btn btn-default button-4pm">4pm-6pm</button>
             <button type="button" class="btn btn-default button-6pm">6pm-8pm</button>
         </div>
-        <div class="plan-categories">
-            <p>categories</p>
-        </div>
 
+        <div class="plan-categories btn-group">
+            <FORM ACTION={{url_for("display_activities_for_category", category_id=5)}}>
+                <INPUT TYPE="submit" VALUE="Visit landmark">
+            </FORM>
+            <button method="get" type="button" class="btn btn-default button-Visit-museum">Visit landmark</button>
+
+            <button method="get" type="button" class="btn btn-default button-Eat">Visit museum</button>
+            
+        </div>
     </div>
 </div>
 {% endfor %}
-
 {% endblock %}

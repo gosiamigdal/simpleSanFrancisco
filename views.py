@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, request, g, session, url_for, flash
-from model import User, Plan
+from model import User, Plan, Activity
 from flask.ext.login import LoginManager, login_required, login_user, current_user, logout_user
 from flaskext.markdown import Markdown
 import config
@@ -97,10 +97,15 @@ def logout():
     logout_user()
     return redirect(url_for("index"))
 
-@app.route("/categories_display")
-#@login_required
-def display_all_categories():
-    return redirect(url_for("categories_display"))
+
+@app.route("/categories_display/<category_id>")
+@login_required
+def display_activities_for_category(category_id):
+    activity = session.query(Activity).filter_by(category_id=5).all()
+    # return render_template("categories_display.html",category_name=category_id)
+    return activity
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

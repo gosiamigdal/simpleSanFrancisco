@@ -101,6 +101,7 @@ class Activity(Base):
     category_id = Column(Integer, ForeignKey("categories.id"))
     
     category = relationship("Category")
+
     timeline_activities = relationship("TimelineActivity", uselist=True)
 
 

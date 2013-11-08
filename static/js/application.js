@@ -1,7 +1,7 @@
 $(function() {
     $(".alert").alert();
-
     $(".plan-buttons .btn").click( function (event) {
+
         var cssClass = $(this).attr("class");
         cssClass = cssClass.split("button-")[1];
         //alert("Button clicked!" + cssClass); // TODO
@@ -14,9 +14,9 @@ $(function() {
 
     });
 
-
-    // ...
-    // val cssClass = $(".plan-buttons .toggled").attr("class");
-    // cssClass = cssClass.split("button-")[1];
-    // /select/2pm/dining
+    $(".plan-categories .btn").click(function (event) {
+        $(".plan-buttons .btn").removeClass("toggled");
+        $(".plan-categories .btn").removeClass("toggled");
+        $(this).addClass("toggled");
+    });
 });
