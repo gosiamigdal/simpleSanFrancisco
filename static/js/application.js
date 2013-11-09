@@ -19,4 +19,9 @@ $(function() {
         $(".plan-categories .btn").removeClass("toggled");
         $(this).addClass("toggled");
     });
+
+    $(".turn_green").click(function (event) {
+        $(".turn_green").removeClass("green");
+        $(this).addClass("green");
+    });
 });

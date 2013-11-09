@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 {% block body %}
 <h1>{{plan.name}}</h1>
-    Categories for:{{timeslots[order]}}
-<div class="row">
+    <h4 class="subtitle">Categories for: {{timeslots[order]}}</h4>
+<div class="row categories_together">
     {% for category in categories %}
-     <div class="col-md-4"><a href="{{url_for("activities_for_timeslot", plan_id=plan.id, order=order,category_id=category.id)}}" class="btn btn-default a-10am">{{category.name}}</a></div>
+     <div class="col-md-4">
+       <a href="{{url_for("activities_for_timeslot", plan_id=plan.id, order=order,category_id=category.id)}}" class="btn btn-default a-10am separate-button turn_green">
+            <div class="category_name">{{category.name}}</div></a>
+    </div>
     {% endfor %}
 </div>
 {% endblock %}
