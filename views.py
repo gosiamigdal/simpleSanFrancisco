@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, request, g, session, url_for, flash
-from model import User, Plan, Activity, Category
+from model import User, Plan, Activity, Category, Timeline, TimelineActivity
 from flask.ext.login import LoginManager, login_required, login_user, current_user, logout_user
 from flaskext.markdown import Markdown
 import config
@@ -45,7 +45,8 @@ def index():
 @app.route("/plan/<int:id>")
 def view_plan(id):
     plan = Plan.query.get(id)
-    return render_template("plan.html", plan=plan,timeslots=timeslots)
+    timelines = plan.timelines
+    return render_template("plan.html", plan=plan, timelines=timelines, timeslots=timeslots)
 
 @app.route("/plan/new")
 @login_required
@@ -62,6 +63,10 @@ def create_plan():
 
     plan = Plan(name=form.name.data, start_date=form.start_date.data, end_date=form.end_date.data)
     current_user.plans.append(plan) 
+
+    for day in plan.date_range():
+        timeline = Timeline(date=day)
+        plan.timelines.append(timeline)
     
     model.session.commit()
     model.session.refresh(plan)
@@ -100,19 +105,33 @@ def logout():
     return redirect(url_for("index"))
 
 
-@app.route("/plan/<int:plan_id>/timeslot/<int:order>/category/<int:category_id>")
+@app.route("/plan/<int:plan_id>/time/<int:day>/<int:order>/category/<int:category_id>")
 @login_required
-def activities_for_timeslot(plan_id,order,category_id):
+def activities_for_timeslot(plan_id, day, order, category_id):
     category = Category.query.get(category_id)
     plan = Plan.query.get(plan_id)
-    return render_template("activities.html", category=category,plan=plan,order=order,timeslots=timeslots)
+    return render_template("activities.html", category=category, plan=plan, order=order, day=day, timeslots=timeslots)
  
 
-@app.route("/plan/<int:plan_id>/timeslot/<int:order>")
-def categories_for_timeslot(plan_id,order):
+@app.route("/plan/<int:plan_id>/time/<int:day>/<int:order>")
+def categories_for_timeslot(plan_id, day, order):
     categories = Category.query.all()
     plan = Plan.query.get(plan_id)
-    return render_template("categories.html",categories=categories,plan=plan,order=order,timeslots=timeslots)
+    return render_template("categories.html", categories=categories, plan=plan, order=order, day=day, timeslots=timeslots)
+
+
+@app.route("/plan/<int:plan_id>/time/<int:day>/<int:order>/category/<int:category_id>", methods=["POST"])
+@login_required
+def select_activity_for_timeslot(plan_id, day, order, category_id):
+    activity_id = request.form["activity_id"]
+    timeline_activity = TimelineActivity(activity_id=activity_id, timeline_id=day, order=order)
+    model.session.add(timeline_activity)
+    model.session.commit()
+    return redirect(url_for("view_plan", id=plan_id))
+
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+

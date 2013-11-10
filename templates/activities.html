@@ -9,7 +9,10 @@
     <img src="{{activity.photo_url}}">
   </div>
   <div class="col-md-9 body">
-    <p class="lead title">{{activity.title}} <a href="#" class="btn btn-success"><span class="glyphicon glyphicon-time"></span> Plan this</a></p>
+    <form method="POST">
+        <input type="hidden" name="activity_id" value="{{activity.id}}"/>
+        <p class="lead title">{{activity.title}} <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-time"></span> Plan this</button></p>
+    </form>
     <p>{{activity.description}}</p>
   </div>
 </div>

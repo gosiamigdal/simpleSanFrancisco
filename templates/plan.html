@@ -3,13 +3,13 @@
 <h1>{{plan.name}}</h1>
 <h3>{{plan.start_date|datetime('%B %d')}} to {{plan.end_date|datetime('%B %d, %Y')}}</h3>
 
-{% for timeline_date in plan.date_range() %}
+{% for timeline in timelines %}
 <div class="panel panel-default">
-    <div class="panel-heading">{{timeline_date|datetime('%B %d')}}</div>
+    <div class="panel-heading">{{timeline.date|datetime('%B %d')}}</div>
     <div class="panel-body">
         <div class="plan-buttons btn-group">
             {% for order, time in timeslots.iteritems() %}
-                <a href="{{url_for("categories_for_timeslot", plan_id=plan.id, order=order)}}" class="btn btn-default a-10am">{{time}}</a>
+                <a href="{{url_for("categories_for_timeslot", plan_id=plan.id, day=timeline.id, order=order)}}" class="btn btn-default a-10am">{{time}}</a>
                 {% endfor %}
         </div>
     </div>

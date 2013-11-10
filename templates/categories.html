@@ -5,7 +5,7 @@
 <div class="row categories_together">
     {% for category in categories %}
      <div class="col-md-4">
-       <a href="{{url_for("activities_for_timeslot", plan_id=plan.id, order=order,category_id=category.id)}}" class="btn btn-default a-10am separate-button turn_green">
+       <a href="{{url_for("activities_for_timeslot", plan_id=plan.id, day=day, order=order,category_id=category.id)}}" class="btn btn-default a-10am separate-button turn_green">
             <div class="category_name">{{category.name}}</div></a>
     </div>
     {% endfor %}
