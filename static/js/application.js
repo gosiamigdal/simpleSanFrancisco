@@ -20,8 +20,11 @@ $(function() {
         $(this).addClass("toggled");
     });
 
-    $(".turn_green").click(function (event) {
-        $(".turn_green").removeClass("green");
-        $(this).addClass("green");
+    $(".turn_green").mousedown(function (event) {
+        $(".turn_green").removeClass("mouse_down");
+        $(this).addClass("mouse_down");
+    });
+    $(".turn_green").mouseout(function (event) {
+        $(".turn_green").removeClass("mouse_down");
     });
 });

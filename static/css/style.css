@@ -49,8 +49,12 @@
 }
 
 
-.green .green:hover {
-    background-color: #5cb85c;
+.turn_green:hover {
+    background-color: #47a447;
+}
+
+.mouse_down {
+    background-color: red !important;
 }
 
 

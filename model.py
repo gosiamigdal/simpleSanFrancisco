@@ -114,18 +114,8 @@ class Category(Base):
     id = Column(Integer,primary_key=True, autoincrement=True)
     name = Column(String(80))
     symbol_url = Column(String(120))
-    #time_string = Column(String(40))
     activities = relationship("Activity", uselist=True) 
 
-    def suitable_time(self, time):
-        #time looks like this : "10-12"
-        #split the time_string so it looks like this : ["10-12", "12-2"]
-        #if the time we've asked about is in the time_string array that we just split
-        #if time in time_list:
-            #return true
-        #else
-            #return false
-            pass
 
 
 def create_tables():
