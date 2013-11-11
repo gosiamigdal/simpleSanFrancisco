@@ -7,6 +7,7 @@ import forms
 import model
 import datetime
 
+
 app = Flask(__name__)
 app.config.from_object(config)
 
@@ -47,7 +48,15 @@ def view_plan(id):
     plan = Plan.query.get(id)
     timelines = plan.timelines
     timeline_activities = TimelineActivity.query.join(Timeline).join(Plan).join(Activity).filter(Plan.id==id)
-    return render_template("plan.html", plan=plan, timelines=timelines, timeslots=timeslots, timeline_activities=timeline_activities)
+    activities_by_timeline = {}
+    for activity in timeline_activities:
+        t_id = activity.timeline_id
+        existing = activities_by_timeline.get(t_id,[])
+        existing.append(activity)
+        activities_by_timeline[t_id] = existing
+
+
+    return render_template("plan.html", plan=plan, timelines=timelines, timeslots=timeslots, activities_by_timeline=activities_by_timeline)
 
 @app.route("/plan/new")
 @login_required

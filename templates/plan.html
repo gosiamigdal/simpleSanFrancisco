@@ -12,12 +12,14 @@
                 <a href="{{url_for("categories_for_timeslot", plan_id=plan.id, day=timeline.id, order=order)}}" class="btn btn-default a-10am">{{time}}</a>
                 {% endfor %}
         </div>
+        {% for timeline_activity in activities_by_timeline.get(timeline.id, []) %}
+            <div>{{timeline_activity.activity_id}}, {{timeline_activity.activity.title}}</div>
+
+        {% endfor %}
+
     </div>
 
 </div>
 {% endfor %}
-{% for timeline_activity in timeline_activities %}
-    <div>{{timeline_activity.activity_id}}, {{timeline_activity.activity.title}}</div>
 
-{% endfor %}
 {% endblock %}
