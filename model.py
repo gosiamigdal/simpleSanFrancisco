@@ -4,7 +4,7 @@ from datetime import datetime, date, timedelta
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine, ForeignKey
-from sqlalchemy import Column, Integer, String, DateTime, Text
+from sqlalchemy import Column, Integer, String, DateTime, Text, Index
 
 from sqlalchemy.orm import sessionmaker, scoped_session, relationship, backref
 
@@ -87,6 +87,8 @@ class TimelineActivity(Base):
 
     timeline = relationship("Timeline")
     activity = relationship("Activity")
+
+    __table_args__ = (Index("timeline_id", "order", unique=True),)
 
 
 

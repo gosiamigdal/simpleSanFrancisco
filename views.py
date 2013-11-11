@@ -133,9 +133,13 @@ def categories_for_timeslot(plan_id, day, order):
 @login_required
 def select_activity_for_timeslot(plan_id, day, order, category_id):
     activity_id = request.form["activity_id"]
-    timeline_activity = TimelineActivity(activity_id=activity_id, timeline_id=day, order=order)
-    model.session.add(timeline_activity)
-    model.session.commit()
+    activity_in_db = TimelineActivity.query.filter_by(timeline_id=day, order=order).first()
+    if activity_in_db == None:
+        timeline_activity = TimelineActivity(activity_id=activity_id, timeline_id=day, order=order)
+        model.session.add(timeline_activity)
+    else:
+        activity_in_db.activity_id = activity_id
+    model.session.commit()  
     return redirect(url_for("view_plan", id=plan_id))
 
 
