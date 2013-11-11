@@ -9,14 +9,15 @@
     <div class="panel-body">
         <div class="plan-buttons btn-group">
             {% for order, time in timeslots.iteritems() %}
-                <a href="{{url_for("categories_for_timeslot", plan_id=plan.id, day=timeline.id, order=order)}}" class="btn btn-default a-10am">{{time}}</a>
-                {% endfor %}
+                <div class="plan-activity">
+                    <a href="{{url_for("categories_for_timeslot", plan_id=plan.id, day=timeline.id, order=order)}}" class="btn btn-default a-10am">{{time}}</a>
+                    {% if (timeline.id, order) in activities_by_timeslot %}
+                        {% set activity = activities_by_timeslot[(timeline.id, order)] %}
+                            <p>{{activity.activity.title}}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
         </div>
-        {% for timeline_activity in activities_by_timeline.get(timeline.id, []) %}
-            <div>{{timeline_activity.activity_id}}, {{timeline_activity.activity.title}}</div>
-
-        {% endfor %}
-
     </div>
 
 </div>
