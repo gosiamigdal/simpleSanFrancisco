@@ -1,3 +1,7 @@
+body {
+    background-color: #e8dcdd;
+}
+
 .plan-categories {
     display: none;
 }
@@ -70,11 +74,11 @@
 
 
 .turn_green:hover {
-    background-color: #47a447;
+    background-color: #66E275;
 }
 
 .mouse_down {
-    background-color: red !important;
+    background-color: #5CA82A !important;
 }
 
 

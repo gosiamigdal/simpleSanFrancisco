@@ -4,7 +4,6 @@ $(function() {
 
         var cssClass = $(this).attr("class");
         cssClass = cssClass.split("button-")[1];
-        //alert("Button clicked!" + cssClass); // TODO
 
         $(".plan-buttons .btn").removeClass("toggled");
         $(this).addClass("toggled");
