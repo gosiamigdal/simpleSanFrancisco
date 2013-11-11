@@ -46,7 +46,8 @@ def index():
 def view_plan(id):
     plan = Plan.query.get(id)
     timelines = plan.timelines
-    return render_template("plan.html", plan=plan, timelines=timelines, timeslots=timeslots)
+    timeline_activities = TimelineActivity.query.join(Timeline).join(Plan).join(Activity).filter(Plan.id==id)
+    return render_template("plan.html", plan=plan, timelines=timelines, timeslots=timeslots, timeline_activities=timeline_activities)
 
 @app.route("/plan/new")
 @login_required

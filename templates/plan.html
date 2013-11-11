@@ -16,4 +16,8 @@
 
 </div>
 {% endfor %}
+{% for timeline_activity in timeline_activities %}
+    <div>{{timeline_activity.activity_id}}, {{timeline_activity.activity.title}}</div>
+
+{% endfor %}
 {% endblock %}
