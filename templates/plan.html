@@ -5,7 +5,7 @@
 
 {% for timeline in timelines %}
 <div class="panel panel-default">
-    <div class="panel-heading">{{timeline.date|datetime('%B %d')}}</div>
+    <div class="panel-heading panel">{{timeline.date|datetime('%B %d')}}</div>
     <div class="panel-body">
         <div class="plan-buttons btn-group">
             {% for order, time in timeslots.iteritems() %}
@@ -14,7 +14,7 @@
                     {% if (timeline.id, order) in activities_by_timeslot %}
                         {% set activity = activities_by_timeslot[(timeline.id, order)] %}
                             <p>{{activity.activity.title}}</p>
-                            <img src="{{activity.activity.photo_url}}"/>
+                            <img src="/static/images/{{activity.activity.photo_url}}"/>
                     {% endif %}
                 </div>
             {% endfor %}

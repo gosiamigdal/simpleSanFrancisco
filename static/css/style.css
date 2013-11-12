@@ -5,9 +5,10 @@
 .plan-activity {
     width: 200px; 
     background-color: lightblue;
-    margin-right: 10px; 
+    margin: 0px 10px; 
     float: left;
 }
+
 
 .plan-activity a {
     width: 200px; 
@@ -19,7 +20,7 @@
 }
 
 .plan-activity img {
-    width: 180px; 
+    width: 200px; 
 }
 
 .toggled {
