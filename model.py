@@ -98,8 +98,8 @@ class Activity(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     title = Column(String(80))
-    photo_url = Column(String(120))
-    description = Column(String(1000))
+    photo_url = Column(String(150))
+    description = Column(String(1500))
     category_id = Column(Integer, ForeignKey("categories.id"),nullable=False)
     
     category = relationship("Category")
