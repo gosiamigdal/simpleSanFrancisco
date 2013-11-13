@@ -9,6 +9,10 @@
     float: left;
 }
 
+.title_on_timeline {
+    height: 62px; 
+}
+
 
 .plan-activity a {
     width: 200px; 

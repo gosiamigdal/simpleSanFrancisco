@@ -13,7 +13,7 @@
                     <a href="{{url_for("categories_for_timeslot", plan_id=plan.id, day=timeline.id, order=order)}}" class="btn btn-default a-10am">{{time}}</a>
                     {% if (timeline.id, order) in activities_by_timeslot %}
                         {% set activity = activities_by_timeslot[(timeline.id, order)] %}
-                            <p>{{activity.activity.title}}</p>
+                            <div class="title_on_timeline"><p>{{activity.activity.title}}</p></div>
                             <img src="/static/images/{{activity.activity.photo_url}}"/>
                     {% endif %}
                 </div>

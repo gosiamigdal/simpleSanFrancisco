@@ -3,7 +3,7 @@
 {% block body %}
 <h1>{{plan.name}}</h1>
 <h3>{{category.name}} at {{timeslots[order]}}</h3>
-{% for activity in category.activities %}
+{% for activity in activities %}
 <div class="row activity">
   <div class="col-md-3 photo">
     <img src="/static/images/{{activity.photo_url}}">
@@ -16,11 +16,6 @@
     <p>{{activity.description}}</p>
   </div>
 </div>
-{% endfor %}
-
-
-{% for activity in activities %}
-    {{activity.title}}<br>
 {% endfor %}
 
 {% endblock %}
