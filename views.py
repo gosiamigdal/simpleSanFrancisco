@@ -119,8 +119,12 @@ def logout():
 def activities_for_timeslot(plan_id, day, order, category_id):
     category = Category.query.get(category_id)
     plan = Plan.query.get(plan_id)
-    return render_template("activities.html", category=category, plan=plan, order=order, day=day, timeslots=timeslots)
+    print category_id
+    activities = Activity.query.filter_by(category_id=category_id).all()
+    print activities
+    return render_template("activities.html", category=category, plan=plan, order=order, day=day, timeslots=timeslots, activities=activities)
  
+
 
 @app.route("/plan/<int:plan_id>/time/<int:day>/<int:order>")
 def categories_for_timeslot(plan_id, day, order):

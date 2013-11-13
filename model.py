@@ -108,7 +108,6 @@ class Activity(Base):
 
 
 
-
 # Each Category has many activities 
 class Category(Base):
     __tablename__ = "categories"
@@ -116,6 +115,7 @@ class Category(Base):
     id = Column(Integer,primary_key=True, autoincrement=True)
     name = Column(String(80))
     symbol_url = Column(String(120))
+
     activities = relationship("Activity", uselist=True) 
 
 
