@@ -101,6 +101,7 @@ class Activity(Base):
     photo_url = Column(String(150))
     description = Column(String(1500))
     category_id = Column(Integer, ForeignKey("categories.id"),nullable=False)
+    website_url = Column(String(150))
     
     category = relationship("Category")
 

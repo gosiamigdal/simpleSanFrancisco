@@ -96,10 +96,11 @@
     background-color: #5CA82A !important;
 }
 
+.add-button {
+    margin-left: 12px; 
+}
 
 
-
-
-
-
-
+.lead-title {
+    font-size: 20px; 
+}
