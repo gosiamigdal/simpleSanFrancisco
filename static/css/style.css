@@ -65,12 +65,18 @@
 }
 
 .category_name {
-    margin-top: 50px; 
+    margin-top: 30px; 
 }
 
 .category_name div {
     font-size: 150%;
 }
+
+
+.category_name img {
+    margin-top: 22px; 
+}
+
 
 .symbol {
     margin-top: 14px; 
