@@ -6,7 +6,11 @@ import config
 import forms
 import model
 import datetime
+import forecastio
 
+api_key = "a313c0308a8c82e645559fdee426930a"
+lat = 37.761169
+lng = -122.442112
 
 app = Flask(__name__)
 app.config.from_object(config)
@@ -38,10 +42,19 @@ def load_user(user_id):
 # Adding markdown capability to the app
 Markdown(app)
 
+
 @app.route("/")
 def index():
     plans = Plan.query.all()
     return render_template("index.html", plans=plans)
+
+
+def forecast_for_day(day):
+    forecast = forecastio.load_forecast(api_key, lat, lng, units="auto", time=day)
+    return forecast.daily().data[0]
+
+
+
 
 @app.route("/plan/<int:id>")
 def view_plan(id):
@@ -51,11 +64,10 @@ def view_plan(id):
     activities_by_timeslot = {}
     for activity in timeline_activities:
         t_id = activity.timeline_id
-        #existing = activities_by_timeslot.get(t_id,[])
-        #existing.append(activity)
         activities_by_timeslot[(t_id, activity.order)] = activity
+    days = [(t, forecast_for_day(t.date)) for t in timelines]
+    return render_template("plan.html", plan=plan, days=days, timeslots=timeslots, activities_by_timeslot=activities_by_timeslot)
 
-    return render_template("plan.html", plan=plan, timelines=timelines, timeslots=timeslots, activities_by_timeslot=activities_by_timeslot)
 
 @app.route("/plan/new")
 @login_required

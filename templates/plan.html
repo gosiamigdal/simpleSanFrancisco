@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block body %}
 <h1>{{plan.name}}</h1>
+<h3>{{forecast}}</h3>
 <h3>{{plan.start_date|datetime('%B %d')}} to {{plan.end_date|datetime('%B %d, %Y')}}</h3>
-
-{% for timeline in timelines %}
+{% for timeline, forecast in days %}
 <div class="panel panel-default">
-    <div class="panel-heading panel">{{timeline.date|datetime('%B %d')}}</div>
+    <div class="panel-heading panel">{{timeline.date|datetime('%B %d')}} {{forecast.icon}} {{forecast.summary}} {{forecast.temperatureMax}}</div>
     <div class="panel-body">
         <div class="plan-buttons btn-group">
             {% for order, time in timeslots.iteritems() %}
@@ -20,7 +20,6 @@
             {% endfor %}
         </div>
     </div>
-
 </div>
 {% endfor %}
 

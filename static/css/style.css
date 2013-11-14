@@ -68,6 +68,10 @@
     margin-top: 50px; 
 }
 
+.category_name div {
+    font-size: 150%;
+}
+
 .symbol {
     margin-top: 14px; 
 }
