@@ -5,7 +5,19 @@
 <h3>{{plan.start_date|datetime('%B %d')}} to {{plan.end_date|datetime('%B %d, %Y')}}</h3>
 {% for timeline, forecast in days %}
 <div class="panel panel-default">
-    <div class="panel-heading panel">{{timeline.date|datetime('%B %d')}} {{forecast.icon}} {{forecast.summary}} {{forecast.temperatureMax}}</div>
+    <div class="panel-heading panel">{{timeline.date|datetime('%B %d')}} 
+    {% if forecast.icon == 'partly-cloudy-day' %}
+        <img src="/static/weather_icons/partly_cloudy_day.png" class="weather-icon">
+    {% elif forecast.icon == 'partly-cloudy-night' %}
+        <img src="/static/weather_icons/partly_cloudy_night.png" class="weather-icon">
+    {% elif forecast.icon == 'clear-night' %}
+        <img src="/static/weather_icons/clear_night.png" class="weather-icon">
+    {% elif forecast.icon == 'clear-day' %} 
+        <img src="/static/weather_icons/clear_day.png" class="weather-icon">
+    {% else %}
+        <img src="/static/weather_icons/do_not_know.png" class="weather-icon">
+    {% endif %}
+{{forecast.summary}} Max temperature: {{forecast.temperatureMax}} F</div>
     <div class="panel-body">
         <div class="plan-buttons btn-group">
             {% for order, time in timeslots.iteritems() %}

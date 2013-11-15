@@ -104,3 +104,10 @@
 .lead-title {
     font-size: 20px; 
 }
+
+.weather-icon {
+    width: 40px; 
+    margin: 0px 8px;
+}
+
+
