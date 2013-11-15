@@ -119,7 +119,7 @@
 .first-button {
     border: 1px solid transparent;
     background-color: #e7e7e7;
-    margin: -1px 150px;
+    margin: -2px 150px;
 }
 
 
@@ -145,7 +145,14 @@
 }
 
 
+.form-group {
+    width: 500px;
+}
 
+.calendar {
+    margin-top: 150px;
+    margin-left: 300px;
+}
 
 
 
