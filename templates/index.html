@@ -17,9 +17,6 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="{{url_for("plans")}}">My plans</a>
                 </div>
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="{{url_for("new_plan")}}">New plan</a>
-                </div>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">{{current_user.email}}</a></li>
                     {% if current_user.is_authenticated() %}
@@ -39,7 +36,7 @@
                 <em class="very-main-title">Plan San Francisco trip</em>
                 <em class="main-title">Fast.Easy.Only best activities.</em>
             </div>
-                <a href="#about" class="btn btn-default btn-lg first-button">Create plan</a>
+                <a href="{{url_for("new_plan")}}" class="btn btn-default btn-lg first-button">Create plan</a>
         </div>
     </body>
 </html>
