@@ -49,6 +49,12 @@ def index():
     return render_template("index.html", plans=plans)
 
 
+@app.route("/plans")
+def plans():
+    plans = Plan.query.all()
+    return render_template("plans.html", plans=plans)
+
+
 def forecast_for_day(day):
     forecast = forecastio.load_forecast(api_key, lat, lng, units="auto", time=day)
     return forecast.daily().data[0]

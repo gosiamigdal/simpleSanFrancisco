@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>Simple San Francisco</title>
@@ -13,11 +14,12 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="{{url_for("index")}}">Simple SF</a>
                 </div>
-
-                <ul class="nav navbar-nav">
-                    <li><a href="{{url_for("new_plan")}}">New plan</a></li>
-                </ul>
-
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{url_for("plans")}}">My plans</a>
+                </div>
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{url_for("new_plan")}}">New plan</a>
+                </div>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">{{current_user.email}}</a></li>
                     {% if current_user.is_authenticated() %}
@@ -27,16 +29,13 @@
                     {% endif %}
                 </ul>
             </nav>
-
             {% for message in get_flashed_messages() %}
             <div class="alert alert-info">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 {{message}}
-            </div>
+        </div>
             {% endfor %}
-
             {% block body %}
             {% endblock %}
-        </div>
     </body>
 </html>

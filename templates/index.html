@@ -1,8 +1,2 @@
 {% extends 'base.html' %}
-{% block body %}
-{% for plan in plans %}
-<div class="post">
-    <h2><a href="{{url_for("view_plan", id=plan.id)}}">{{plan.name}}</a></h2>
-</div>
-{% endfor %}
-{% endblock %}
+

@@ -18,6 +18,7 @@
         <img src="/static/weather_icons/do_not_know.png" class="weather-icon">
     {% endif %}
 {{forecast.summary}} Max temperature: {{forecast.temperatureMax}} F</div>
+
     <div class="panel-body">
         <div class="plan-buttons btn-group">
             {% for order, time in timeslots.iteritems() %}
@@ -27,6 +28,7 @@
                         {% set activity = activities_by_timeslot[(timeline.id, order)] %}
                             <div class="title_on_timeline"><p>{{activity.activity.title}}</p></div>
                             <img src="/static/images/{{activity.activity.photo_url}}"/>
+
                     {% endif %}
                 </div>
             {% endfor %}
@@ -34,5 +36,10 @@
     </div>
 </div>
 {% endfor %}
-
 {% endblock %}
+
+
+
+
+
+
