@@ -116,6 +116,33 @@
     background-size: cover; 
 }
 
+.first-button {
+    border: 1px solid transparent;
+    background-color: #e7e7e7;
+    margin: -1px 150px;
+}
+
+
+.very-main-title {
+    font-size: 55px; 
+    font-weight: bold;
+}
+
+.main-title {
+    font-size: 20px; 
+    margin-left: 100px;
+}
+
+.titles {
+    width: 650px;
+    margin-bottom: 20px;
+}
+
+.main-content-first {
+    margin-top: 70px;
+    width: 650px;
+    margin-left: 530px;
+}
 
 
 
