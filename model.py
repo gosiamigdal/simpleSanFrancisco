@@ -88,7 +88,7 @@ class TimelineActivity(Base):
     timeline = relationship("Timeline")
     activity = relationship("Activity")
 
-    __table_args__ = (Index("timeline_id", "order", unique=True),)
+    __table_args__ = (Index("unique_timeline_activities", "timeline_id", "order", unique=True),)
 
 
 

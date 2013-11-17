@@ -159,7 +159,12 @@ def select_activity_for_timeslot(plan_id, day, order, category_id):
         model.session.add(timeline_activity)
     else:
         activity_in_db.activity_id = activity_id
-    model.session.commit()  
+    try:
+        model.session.commit()  
+    except Exception as e:
+        print "ERROR while saving activity", e
+        model.session.rollback()
+
     return redirect(url_for("view_plan", id=plan_id))
 
 
