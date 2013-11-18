@@ -45,8 +45,7 @@ Markdown(app)
 
 @app.route("/")
 def index():
-    plans = Plan.query.all()
-    return render_template("index.html", plans=plans)
+    return render_template("index.html")
 
 
 @app.route("/plans")

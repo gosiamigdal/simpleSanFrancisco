@@ -22,9 +22,9 @@
                     <a class="navbar-brand" href="{{url_for("new_plan")}}">New plan</a>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">{{current_user.email}}</a></li>
+                    <li id="fb-face"></li>
                     {% if current_user.is_authenticated() %}
-                        <li><a class="logout" href="{{url_for("logout")}}">Logout</a></li>
+                        <li><a class="logout navbar-brand" href="{{url_for("logout")}}">Logout</a></li>
                     {% else %}
                         <li><a href="{{url_for("login")}}">Login</a></li>
                     {% endif %}

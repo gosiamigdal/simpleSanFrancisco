@@ -21,7 +21,7 @@
       // login status of the person. In this case, we're handling the situation where they 
       // have logged in to the app.
       ensurePermanentAccount(response.authResponse);
-      testAPI();
+      showFace();
     } else if (response.status === 'not_authorized') {
       // In this case, the person is logged into Facebook, but not into the app, so we call
       // FB.login() to prompt them to do so. 
@@ -53,10 +53,11 @@
 
   // Here we run a very simple test of the Graph API after login is successful. 
   // This testAPI() function is only called in those cases. 
-  function testAPI() {
+  function showFace() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
       console.log('Good to see you, ' + response.name + '.');
+      $("#fb-face").html(response.name);
     });
   }
 
