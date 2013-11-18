@@ -26,4 +26,9 @@ $(function() {
     $(".turn_green").mouseout(function (event) {
         $(".turn_green").removeClass("mouse_down");
     });
+
+    $(".logout").click(function (event) {
+        console.log("logout!!");
+        FB.logout();
+    });
 });

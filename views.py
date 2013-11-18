@@ -50,8 +50,9 @@ def index():
 
 
 @app.route("/plans")
+@login_required
 def plans():
-    plans = Plan.query.all()
+    plans = Plan.query.join(User).filter(User.id==current_user.get_id())
     return render_template("plans.html", plans=plans)
 
 
@@ -105,14 +106,26 @@ def create_plan():
 
     return redirect(url_for("view_plan", id=plan.id))
 
-@app.route("/signup", methods=["POST"])
-@login_required
-def signup():
-    user_id = current_user.get_id()
+@app.route("/signup_or_login", methods=["POST"])
+def signup_or_login():
     fb_id = request.form["fbId"]
-    user = User.query.get(user_id)
-    user.fb_id = fb_id
-    model.session.commit()
+    existing_user = User.query.filter_by(fb_id=fb_id).first()
+    if current_user.is_authenticated():
+        user_id = current_user.get_id()
+        if existing_user:
+            login_user(existing_user)
+            plans = Plan.query.join(User).filter(User.id==user_id).all()
+            for plan in plans:
+                plan.user_id = existing_user.id
+            model.session.commit()
+        else:
+            user = User.query.get(user_id)
+            user.fb_id = fb_id
+            model.session.commit()
+    else:        
+        login_user(existing_user)
+        # TODO: What if not exist?
+
 
     return "Success"
 

@@ -9,6 +9,7 @@
         <script type="text/javascript" src="/static/js/application.js"></script>
     </head>
     <body>
+        {% include 'fb.html' %}
         <div class="container">
             <nav class="navbar navbar-default" role="navigation">
                 <div class="navbar-header">
@@ -23,7 +24,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">{{current_user.email}}</a></li>
                     {% if current_user.is_authenticated() %}
-                        <li><a href="{{url_for("logout")}}">Logout</a></li>
+                        <li><a class="logout" href="{{url_for("logout")}}">Logout</a></li>
                     {% else %}
                         <li><a href="{{url_for("login")}}">Login</a></li>
                     {% endif %}
