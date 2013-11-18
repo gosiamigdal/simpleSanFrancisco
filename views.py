@@ -76,8 +76,13 @@ def view_plan(id):
 
 
 @app.route("/plan/new")
-@login_required
 def new_plan():
+    if not current_user.is_authenticated():
+        user = User()
+        model.session.add(user)
+        model.session.commit()
+        model.session.refresh(user)
+        login_user(user)
     return render_template("new_plan.html")
 
 @app.route("/plan/new", methods=["POST"])
@@ -99,6 +104,19 @@ def create_plan():
     model.session.refresh(plan)
 
     return redirect(url_for("view_plan", id=plan.id))
+
+@app.route("/signup", methods=["POST"])
+@login_required
+def signup():
+    user_id = current_user.get_id()
+    fb_id = request.form["fbId"]
+    user = User.query.get(user_id)
+    user.fb_id = fb_id
+    model.session.commit()
+
+    return "Success"
+
+
 
 
 @app.route("/login")

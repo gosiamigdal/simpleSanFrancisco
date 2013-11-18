@@ -39,4 +39,4 @@ if __name__ == "__main__":
 
     load_categories(model.session)
     load_activities(model.session)
-    create_users(model.session)
+    #create_users(model.session)

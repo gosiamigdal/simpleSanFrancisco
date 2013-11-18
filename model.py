@@ -25,20 +25,8 @@ class User(Base, UserMixin):
     __tablename__ = "users" 
 
     id = Column(Integer, primary_key=True)
-    email = Column(String(64), nullable=False)
-    password = Column(String(64), nullable=False)
-    salt = Column(String(64), nullable=False)
+    fb_id = Column(String(64))
 
-
-
-    def set_password(self, password):
-        self.salt = bcrypt.gensalt()
-        password = password.encode("utf-8")
-        self.password = bcrypt.hashpw(password, self.salt)
-
-    def authenticate(self, password):
-        password = password.encode("utf-8")
-        return bcrypt.hashpw(password, self.salt.encode("utf-8")) == self.password
 
 
 # Each plan can have many timelines 
