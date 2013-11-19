@@ -113,7 +113,7 @@
 
 .photo-background {
     background-image: url("/static/background/best_golden_gate.jpg"); 
-    background-size: cover; 
+    background-size: cover;
 }
 
 .first-button {
@@ -162,6 +162,13 @@
 }
 
 
+.post {
+    margin: 60px 0px; 
+}
+
+.fb-button {
+    margin-top: -60px;
+}
 
 
 

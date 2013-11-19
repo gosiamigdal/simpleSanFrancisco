@@ -55,9 +55,9 @@
   // This testAPI() function is only called in those cases. 
   function showFace() {
     console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
+    FB.api('/me?fields=picture,name', function(response) {
       console.log('Good to see you, ' + response.name + '.');
-      $("#fb-face").html(response.name);
+      $("#fb-face").html("<img src=\"" + response.picture.data.url + "\" />" + response.name);
     });
   }
 
