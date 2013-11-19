@@ -65,7 +65,15 @@ def forecast_for_day(day):
 @app.route("/plan/<int:id>")
 def view_plan(id):
     plan = Plan.query.get(id)
-    return render_template("plan.html", plan=plan)
+    timelines = plan.timelines
+    timeline_activities = TimelineActivity.query.join(Timeline).join(Plan).join(Activity).filter(Plan.id==id)
+    activities_by_timeslot = {}
+    for activity in timeline_activities:
+        t_id = activity.timeline_id
+        activities_by_timeslot[(t_id, activity.order)] = activity
+    days = [(t, forecast_for_day(t.date)) for t in timelines]
+    return render_template("plan.html", plan=plan, days=days, timeslots=timeslots, activities_by_timeslot=activities_by_timeslot)
+
 
 
 @app.route("/plan/new")
@@ -77,6 +85,7 @@ def new_plan():
         model.session.refresh(user)
         login_user(user)
     return render_template("new_plan.html")
+
 
 @app.route("/plan/new", methods=["POST"])
 @login_required
@@ -158,14 +167,7 @@ def logout():
 @login_required
 def see_summary(id):
     plan = Plan.query.get(id)
-    timelines = plan.timelines
-    timeline_activities = TimelineActivity.query.join(Timeline).join(Plan).join(Activity).filter(Plan.id==id)
-    activities_by_timeslot = {}
-    for activity in timeline_activities:
-        t_id = activity.timeline_id
-        activities_by_timeslot[(t_id, activity.order)] = activity
-    return render_template("summary.html", plan=plan, timelines=timelines, timeline_activities=timeline_activities,timeslots=timeslots,
-                                                                                activities_by_timeslot=activities_by_timeslot)
+    return render_template("summary.html", plan=plan)
 
 
 
