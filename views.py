@@ -65,14 +65,7 @@ def forecast_for_day(day):
 @app.route("/plan/<int:id>")
 def view_plan(id):
     plan = Plan.query.get(id)
-    timelines = plan.timelines
-    timeline_activities = TimelineActivity.query.join(Timeline).join(Plan).join(Activity).filter(Plan.id==id)
-    activities_by_timeslot = {}
-    for activity in timeline_activities:
-        t_id = activity.timeline_id
-        activities_by_timeslot[(t_id, activity.order)] = activity
-    days = [(t, forecast_for_day(t.date)) for t in timelines]
-    return render_template("plan.html", plan=plan, days=days, timeslots=timeslots, activities_by_timeslot=activities_by_timeslot)
+    return render_template("plan.html", plan=plan)
 
 
 @app.route("/plan/new")
@@ -105,6 +98,9 @@ def create_plan():
 
     return redirect(url_for("view_plan", id=plan.id))
 
+
+
+
 @app.route("/signup_or_login", methods=["POST"])
 def signup_or_login():
     fb_id = request.form["fbId"]
@@ -124,11 +120,7 @@ def signup_or_login():
     else:        
         login_user(existing_user)
         # TODO: What if not exist?
-
-
     return "Success"
-
-
 
 
 @app.route("/login")
@@ -160,6 +152,22 @@ def authenticate():
 def logout():
     logout_user()
     return redirect(url_for("index"))
+
+
+@app.route("/summary/<int:id>")
+@login_required
+def see_summary(id):
+    plan = Plan.query.get(id)
+    timelines = plan.timelines
+    timeline_activities = TimelineActivity.query.join(Timeline).join(Plan).join(Activity).filter(Plan.id==id)
+    activities_by_timeslot = {}
+    for activity in timeline_activities:
+        t_id = activity.timeline_id
+        activities_by_timeslot[(t_id, activity.order)] = activity
+    return render_template("summary.html", plan=plan, timelines=timelines, timeline_activities=timeline_activities,timeslots=timeslots,
+                                                                                activities_by_timeslot=activities_by_timeslot)
+
+
 
 
 @app.route("/plan/<int:plan_id>/time/<int:day>/<int:order>/category/<int:category_id>")

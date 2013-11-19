@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block body %}
+<h1>{{plan.name}}</h1>
+<h3>{{plan.start_date|datetime('%B %d')}} to {{plan.end_date|datetime('%B %d, %Y')}}</h3>
+{% endblock %}

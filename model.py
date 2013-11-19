@@ -20,7 +20,6 @@ Base.query = session.query_property()
 
 
 
-
 class User(Base, UserMixin):
     __tablename__ = "users" 
 
