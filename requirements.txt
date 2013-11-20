@@ -1,4 +1,5 @@
 Flask==0.10.1
+Flask-Admin==1.0.7
 Flask-Login==0.2.7
 Flask-Markdown==0.3
 Flask-Migrate==0.1.4

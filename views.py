@@ -4,12 +4,13 @@ from flask.ext.login import LoginManager, login_required, login_user, current_us
 from flaskext.markdown import Markdown
 import config
 import forms
-import models
+from models import db
 import datetime
 import forecastio
-import os
-from flask.ext.sqlalchemy import SQLAlchemy
-from app import app
+from app import app, admin, AuthenticatedModelView
+
+
+
 
 api_key = "a313c0308a8c82e645559fdee426930a"
 lat = 37.761169
@@ -80,9 +81,9 @@ def view_plan(id):
 def new_plan():
     if not current_user.is_authenticated():
         user = User()
-        models.session.add(user)
-        models.session.commit()
-        models.session.refresh(user)
+        db.session.add(user)
+        db.session.commit()
+        db.session.refresh(user)
         login_user(user)
     return render_template("new_plan.html")
 
@@ -102,8 +103,8 @@ def create_plan():
         timeline = Timeline(date=day)
         plan.timelines.append(timeline)
     
-    models.session.commit()
-    models.session.refresh(plan)
+    db.session.commit()
+    db.session.refresh(plan)
 
     return redirect(url_for("view_plan", id=plan.id))
 
@@ -121,11 +122,11 @@ def signup_or_login():
             plans = Plan.query.join(User).filter(User.id==user_id).all()
             for plan in plans:
                 plan.user_id = existing_user.id
-            models.session.commit()
+            db.session.commit()
         else:
             user = User.query.get(user_id)
             user.fb_id = fb_id
-            models.session.commit()
+            db.session.commit()
     else:        
         login_user(existing_user)
         # TODO: What if not exist?
@@ -197,17 +198,23 @@ def select_activity_for_timeslot(plan_id, day, order, category_id):
     activity_in_db = TimelineActivity.query.filter_by(timeline_id=day, order=order).first()
     if activity_in_db == None:
         timeline_activity = TimelineActivity(activity_id=activity_id, timeline_id=day, order=order)
-        models.session.add(timeline_activity)
+        db.session.add(timeline_activity)
     else:
         activity_in_db.activity_id = activity_id
     try:
-        models.session.commit()  
+        db.session.commit()  
     except Exception as e:
         print "ERROR while saving activity", e
-        models.session.rollback()
+        db.session.rollback()
 
     return redirect(url_for("view_plan", id=plan_id))
 
+admin.add_view(AuthenticatedModelView(User, db.session))
+admin.add_view(AuthenticatedModelView(Plan, db.session))
+admin.add_view(AuthenticatedModelView(Category, db.session))
+admin.add_view(AuthenticatedModelView(Activity, db.session))
+admin.add_view(AuthenticatedModelView(Timeline, db.session))
+admin.add_view(AuthenticatedModelView(TimelineActivity, db.session))
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(host='0.0.0.0', port=config.PORT,debug=True)
