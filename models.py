@@ -1,26 +1,15 @@
-import config
-from datetime import datetime, date, timedelta
-
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import create_engine, ForeignKey
-from sqlalchemy import Column, Integer, String, DateTime, Text, Index
-
-from sqlalchemy.orm import sessionmaker, scoped_session, relationship, backref
-
+from datetime import timedelta
+from sqlalchemy import ForeignKey
+from sqlalchemy import Column, Integer, String, DateTime, Index
+from sqlalchemy.orm import relationship
 from flask.ext.login import UserMixin
+from flask.ext.sqlalchemy import SQLAlchemy
 
+from app import app
 
-engine = create_engine(config.DB_URI, echo=False) 
-session = scoped_session(sessionmaker(bind=engine,
-                         autocommit = False,
-                         autoflush = False))
+db = SQLAlchemy(app)
 
-Base = declarative_base()
-Base.query = session.query_property()
-
-
-
-class User(Base, UserMixin):
+class User(db.Model, UserMixin):
     __tablename__ = "users" 
 
     id = Column(Integer, primary_key=True)
@@ -29,7 +18,7 @@ class User(Base, UserMixin):
 
 
 # Each plan can have many timelines 
-class Plan(Base):
+class Plan(db.Model):
     __tablename__ = "plans"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -52,7 +41,7 @@ class Plan(Base):
 
 
 # Timeline belongs to plan 
-class Timeline(Base):
+class Timeline(db.Model):
     __tablename__ = "timelines"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -64,7 +53,7 @@ class Timeline(Base):
     
 
 
-class TimelineActivity(Base):
+class TimelineActivity(db.Model):
     __tablename__ = "timeline_activities"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -80,7 +69,7 @@ class TimelineActivity(Base):
 
 
 # Activity belong to category 
-class Activity(Base):
+class Activity(db.Model):
     __tablename__ = "activities"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -97,7 +86,7 @@ class Activity(Base):
 
 
 # Each Category has many activities 
-class Category(Base):
+class Category(db.Model):
     __tablename__ = "categories"
 
     id = Column(Integer,primary_key=True, autoincrement=True)
@@ -105,15 +94,3 @@ class Category(Base):
     symbol_url = Column(String(120))
 
     activities = relationship("Activity", uselist=True) 
-
-
-
-def create_tables():
-    Base.metadata.create_all(engine)
-
-
-if __name__ == "__main__":
-    create_tables()
-
-
-

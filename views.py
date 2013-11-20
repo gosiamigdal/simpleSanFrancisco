@@ -1,23 +1,21 @@
 from flask import Flask, render_template, redirect, request, g, session, url_for, flash
-from model import User, Plan, Activity, Category, Timeline, TimelineActivity
+from models import User, Plan, Activity, Category, Timeline, TimelineActivity
 from flask.ext.login import LoginManager, login_required, login_user, current_user, logout_user
 from flaskext.markdown import Markdown
 import config
 import forms
-import model
+import models
 import datetime
 import forecastio
 import os
+from flask.ext.sqlalchemy import SQLAlchemy
+from app import app
 
 api_key = "a313c0308a8c82e645559fdee426930a"
 lat = 37.761169
 lng = -122.442112
 
-app = Flask(__name__)
-app.config.from_object(config)
-
 timeslots = {0:"10am", 1:"12pm", 2:"2pm", 3:"4pm",4:"6pm"}
-
 
 def format_datetime(date, fmt='%c'):
     # check whether the value is a datetime object
@@ -82,9 +80,9 @@ def view_plan(id):
 def new_plan():
     if not current_user.is_authenticated():
         user = User()
-        model.session.add(user)
-        model.session.commit()
-        model.session.refresh(user)
+        models.session.add(user)
+        models.session.commit()
+        models.session.refresh(user)
         login_user(user)
     return render_template("new_plan.html")
 
@@ -104,8 +102,8 @@ def create_plan():
         timeline = Timeline(date=day)
         plan.timelines.append(timeline)
     
-    model.session.commit()
-    model.session.refresh(plan)
+    models.session.commit()
+    models.session.refresh(plan)
 
     return redirect(url_for("view_plan", id=plan.id))
 
@@ -123,11 +121,11 @@ def signup_or_login():
             plans = Plan.query.join(User).filter(User.id==user_id).all()
             for plan in plans:
                 plan.user_id = existing_user.id
-            model.session.commit()
+            models.session.commit()
         else:
             user = User.query.get(user_id)
             user.fb_id = fb_id
-            model.session.commit()
+            models.session.commit()
     else:        
         login_user(existing_user)
         # TODO: What if not exist?
@@ -199,20 +197,17 @@ def select_activity_for_timeslot(plan_id, day, order, category_id):
     activity_in_db = TimelineActivity.query.filter_by(timeline_id=day, order=order).first()
     if activity_in_db == None:
         timeline_activity = TimelineActivity(activity_id=activity_id, timeline_id=day, order=order)
-        model.session.add(timeline_activity)
+        models.session.add(timeline_activity)
     else:
         activity_in_db.activity_id = activity_id
     try:
-        model.session.commit()  
+        models.session.commit()  
     except Exception as e:
         print "ERROR while saving activity", e
-        model.session.rollback()
+        models.session.rollback()
 
     return redirect(url_for("view_plan", id=plan_id))
 
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=config.PORT,debug=True)
-
-
-
