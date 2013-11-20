@@ -7,6 +7,7 @@ import forms
 import model
 import datetime
 import forecastio
+import os
 
 api_key = "a313c0308a8c82e645559fdee426930a"
 lat = 37.761169
@@ -16,6 +17,7 @@ app = Flask(__name__)
 app.config.from_object(config)
 
 timeslots = {0:"10am", 1:"12pm", 2:"2pm", 3:"4pm",4:"6pm"}
+
 
 def format_datetime(date, fmt='%c'):
     # check whether the value is a datetime object
@@ -210,7 +212,7 @@ def select_activity_for_timeslot(plan_id, day, order, category_id):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=config.PORT,debug=True)
 
 
 

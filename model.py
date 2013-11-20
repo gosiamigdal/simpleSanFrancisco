@@ -10,6 +10,7 @@ from sqlalchemy.orm import sessionmaker, scoped_session, relationship, backref
 
 from flask.ext.login import UserMixin
 
+
 engine = create_engine(config.DB_URI, echo=False) 
 session = scoped_session(sessionmaker(bind=engine,
                          autocommit = False,
