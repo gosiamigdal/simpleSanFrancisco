@@ -5,3 +5,9 @@ deploy:
   app: secure-temple-1413
   on:
     repo: malgorzatamigdal/simpleSanFrancisco
+language: python
+python:
+  - "2.7"
+install:
+  - pip install -r requirements.txt
+script: true
