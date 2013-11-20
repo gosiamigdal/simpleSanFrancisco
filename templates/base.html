@@ -12,31 +12,40 @@
         {% include 'fb.html' %}
         <div class="container">
             <nav class="navbar navbar-default upper-navbar" role="navigation">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="{{url_for("index")}}">Simple SF</a>
-                </div>
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="{{url_for("plans")}}">My plans</a>
-                </div>
+              <!-- Brand and toggle get grouped for better mobile display -->
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                      <span class="sr-only"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                  </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> 
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="{{url_for("new_plan")}}">New plan</a>
+                        <a class="navbar-brand brand-name" href="{{url_for("index")}}">Simple SF</a>
                     </div>
-
-                <ul class="nav navbar-nav navbar-right">
-                    <li id="fb-face"></li>
-                    {% if current_user.is_authenticated() %}
-                        <li><a class="logout navbar-brand" href="{{url_for("logout")}}">Logout</a></li>
-                    {% else %}
-                        <li><a href="{{url_for("login")}}">Login</a></li>
-                    {% endif %}
-                </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="{{url_for("plans")}}">My plans</a>
+                        </div>
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="{{url_for("new_plan")}}">New plan</a>
+                        </div>
+                        <li id="fb-face"></li>
+                        {% if current_user.is_authenticated() %}
+                            <li><a class="logout navbar-brand" href="{{url_for("logout")}}">Logout</a></li>
+                        {% else %}
+                            <li><a href="{{url_for("login")}}">Login</a></li>
+                        {% endif %}
+                    </ul>
+                {% for message in get_flashed_messages() %}
+                <div class="alert alert-info">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{message}}
+                </div>
+                {% endfor %}
             </nav>
-            {% for message in get_flashed_messages() %}
-            <div class="alert alert-info">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                {{message}}
-        </div>
-            {% endfor %}
             {% block body %}
             {% endblock %}
         <div id="footer">
