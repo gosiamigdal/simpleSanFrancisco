@@ -167,7 +167,8 @@ def logout():
 @login_required
 def see_summary(id):
     plan = Plan.query.get(id)
-    return render_template("summary.html", plan=plan)
+    return render_template("plan.html", plan=plan)
+
 
 
 
