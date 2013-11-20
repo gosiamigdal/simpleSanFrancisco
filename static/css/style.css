@@ -112,7 +112,7 @@
 
 
 .photo-background {
-    background-image: url("/static/background/best_golden_gate.jpg"); 
+    background: url("/static/background/best_golden_gate.jpg") no-repeat center center fixed; 
     background-size: cover;
 }
 
