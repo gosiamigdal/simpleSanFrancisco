@@ -11,16 +11,17 @@
     <body>
         {% include 'fb.html' %}
         <div class="container">
-            <nav class="navbar navbar-default" role="navigation">
+            <nav class="navbar navbar-default upper-navbar" role="navigation">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="{{url_for("index")}}">Simple SF</a>
                 </div>
                 <div class="navbar-header">
                     <a class="navbar-brand" href="{{url_for("plans")}}">My plans</a>
                 </div>
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="{{url_for("new_plan")}}">New plan</a>
-                </div>
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="{{url_for("new_plan")}}">New plan</a>
+                    </div>
+
                 <ul class="nav navbar-nav navbar-right">
                     <li id="fb-face"></li>
                     {% if current_user.is_authenticated() %}

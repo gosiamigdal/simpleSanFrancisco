@@ -11,7 +11,21 @@
     <body class="photo-background">
         {% include 'fb.html' %}
         <div class="container">
-            <nav class="navbar navbar-default" role="navigation">
+
+
+
+        <nav class="navbar navbar-default upper-navbar" role="navigation">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">            
                 <div class="navbar-header">
                     <a class="navbar-brand" href="{{url_for("index")}}">Simple SF</a>
                 </div>
@@ -26,24 +40,26 @@
                         <li><a href="{{url_for("login")}}">Login</a></li>
                     {% endif %}
                 </ul>
-            </nav>
             {% for message in get_flashed_messages() %}
             <div class="alert alert-info">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 {{message}}
             {% endfor %}
+
+
+    </nav>
         <div class="main-content-first">
             <div class="titles">
                 <em class="very-main-title">Plan San Francisco trip</em>
                 <em class="main-title">Fast. Easy. Only best activities.</em>
             </div>
                 <a href="{{url_for("new_plan")}}" class="btn btn-default btn-lg first-button">Create plan</a>
-
             <div id="footer">
                 <div class="navbar-header">
                     <a class="navbar-brand aboutme" href="http://www.linkedin.com/in/malgorzatamigdal/en" target="_blank">About me</a>
                 </div>
             </div>
+            <div>
         </div>
     </body>
 </html>
