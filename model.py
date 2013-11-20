@@ -1,5 +1,4 @@
 import config
-import bcrypt
 from datetime import datetime, date, timedelta
 
 from sqlalchemy.ext.declarative import declarative_base
