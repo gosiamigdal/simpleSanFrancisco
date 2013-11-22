@@ -31,6 +31,7 @@
                         <h3 class="title">{{activity.activity.title}}</h3>
                     </a>
                 {% else %}
+                
                     <a href="{{url_for("categories_for_timeslot", plan_id=plan.id, day=timeline.id, order=order)}}" class="plan-activity unscheduled">
                         <h2 class="time">{{time}}</h2>
                     </a>

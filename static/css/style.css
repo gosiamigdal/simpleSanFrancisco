@@ -159,13 +159,17 @@ h2, h3,
     border-radius: 8px;
 }
 
+
 .mouse_down {
     background-color: #5CA82A !important;
 }
 
+
 .add-button {
     margin-left: 22px; 
     margin-bottom: 14px;
+    margin-top: 20px;
+    display: inline;
 }
 
 
@@ -177,6 +181,12 @@ h2, h3,
 
 .lead-title:hover {
     color: black;
+}
+
+
+.lead-dv {
+    min-width: 349px;
+    display: inline-block;
 }
 
 
