@@ -162,12 +162,19 @@ h2, h3,
 }
 
 .add-button {
-    margin-left: 12px; 
+    margin-left: 22px; 
+    margin-bottom: 14px;
 }
 
 
 .lead-title {
-    font-size: 20px; 
+    font-family: 'Molengo', sans-serif;
+    font-size: 22px;
+    color: black;
+}
+
+.lead-title:hover {
+    color: black;
 }
 
 
@@ -210,7 +217,7 @@ body.index {
 
 
 .timeline-panel {
-    margin-bottom: 0px;
+    margin-bottom: 8px;
 }
 
 
@@ -239,9 +246,19 @@ h4 {
 }
 
 .plan-activity {
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
+.create-plan {
+    margin-top: 15px;
+}
+
+
+.description {
+    text-align:justify;
+    text-justify:inter-word;
+    font-size: 15px;
+}
 
 
 

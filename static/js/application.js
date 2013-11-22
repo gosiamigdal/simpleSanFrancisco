@@ -11,7 +11,7 @@ $(function() {
         $(".plan-categories").hide();
         $(this).parent().parent().children(".plan-categories").show();
 
-    });
+    }); 
 
     $(".plan-categories .btn").click(function (event) {
         $(".plan-buttons .btn").removeClass("toggled");

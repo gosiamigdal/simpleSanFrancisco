@@ -9,14 +9,13 @@ import datetime
 import forecastio
 from app import app, admin, AuthenticatedModelView
 import re
-
-
-
 api_key = "a313c0308a8c82e645559fdee426930a"
 lat = 37.761169
 lng = -122.442112
 
 timeslots = {0:"10am", 1:"12pm", 2:"2pm", 3:"4pm",4:"6pm"}
+
+
 
 @app.template_filter('datetime')
 def format_datetime(date, fmt='%c'):
@@ -27,6 +26,8 @@ def format_datetime(date, fmt='%c'):
         except Exception, e:
             return date
     return date.strftime(fmt)
+
+
 
 @app.template_filter('quoted')
 def quoted(s):
@@ -116,7 +117,6 @@ def create_plan():
 
 
 
-
 @app.route("/signup_or_login", methods=["POST"])
 def signup_or_login():
     fb_id = request.form["fbId"]
@@ -163,6 +163,7 @@ def authenticate():
     login_user(user)
     return redirect(request.args.get("next", url_for("index")))
 
+
 @app.route("/logout")
 @login_required
 def logout():
@@ -175,8 +176,6 @@ def logout():
 def see_summary(id):
     plan = Plan.query.get(id)
     return render_template("plan.html", plan=plan)
-
-
 
 
 
@@ -215,12 +214,14 @@ def select_activity_for_timeslot(plan_id, day, order, category_id):
 
     return redirect(url_for("view_plan", id=plan_id))
 
+
 admin.add_view(AuthenticatedModelView(User, db.session))
 admin.add_view(AuthenticatedModelView(Plan, db.session))
 admin.add_view(AuthenticatedModelView(Category, db.session))
 admin.add_view(AuthenticatedModelView(Activity, db.session))
 admin.add_view(AuthenticatedModelView(Timeline, db.session))
 admin.add_view(AuthenticatedModelView(TimelineActivity, db.session))
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=config.PORT,debug=True)
