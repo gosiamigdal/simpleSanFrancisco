@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Simple San Francisco</title>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
         <link rel="stylesheet" href="/static/css/bootstrap.min.css">
         <link rel="stylesheet" href="/static/css/style.css">
         <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
@@ -14,30 +15,23 @@
         {% include 'fb.html' %}
         <div class="container">
             <nav class="navbar navbar-default upper-navbar" role="navigation">
-              <!-- Brand and toggle get grouped for better mobile display -->
-                  <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                      <span class="sr-only"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#simple-sf-collapse">
+                        <span class="sr-only"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
                     </button>
-                  </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> 
-                    <div class="navbar-header">
-                        <a class="navbar-brand brand-name" href="{{url_for("index")}}">Simple SF</a>
-                    </div>
+                    <a class="navbar-brand brand-name" href="{{url_for("index")}}">Simple SF</a>
+                </div>
+                <div class="collapse navbar-collapse" id="simple-sf-collapse">
                     <ul class="nav navbar-nav navbar-left">
                         <li><a href="http://www.linkedin.com/in/malgorzatamigdal/en" target="_blank">About me</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="{{url_for("plans")}}">My plans</a>
-                        </li>
-                        <li>
-                            <a href="{{url_for("new_plan")}}">New plan</a>
-                        </li>
-                        <li id="fb-face"></li>
+                        <li><a href="{{url_for("plans")}}">My plans</a></li>
+                        <li><a href="{{url_for("new_plan")}}">New plan</a></li>
+                        <li><span id="fb-face"></span></li>
                         {% if current_user.is_authenticated() %}
                             <li><a href="{{url_for("logout")}}">Logout</a></li>
                         {% else %}
@@ -51,8 +45,7 @@
                 </div>
                 {% endfor %}
             </nav>
-            {% block body %}
-            {% endblock %}
-    
+            {% block body %}{% endblock %}
+        </div>
     </body>
 </html>
