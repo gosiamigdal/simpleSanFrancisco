@@ -2,7 +2,7 @@ deploy:
   provider: heroku
   api_key:
     secure: S9pJ6o4tlKzLSnxWVOXlrDN0xxDEYZB6sEe/3C5iTP+jtUchLhnQH47H2a/qHRZkQ0wbqPS0sGADfBJO79uuiiZGJ8Jf4CA6Lnlr+7yk704b+722cI8Oayw4p/3XjiTgBxAQWmYXcYHf8zH/SuluHm9AQkrHrtxnhks3xg01jpg=
-  app: secure-temple-1413
+  app: simplesanfrancisco
   on:
     repo: malgorzatamigdal/simpleSanFrancisco
 language: python
