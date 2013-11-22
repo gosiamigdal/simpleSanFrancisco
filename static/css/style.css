@@ -11,12 +11,12 @@
 }
 
 
-.hero h1 {
+h1 {
     font-weight: 400;
     font-family: 'Lobster', cursive;
 }
 
-.hero h3,
+h2, h3,
 .hero a {
     font-weight: 400;
     font-family: 'Molengo', sans-serif;
@@ -43,28 +43,43 @@
 }
 
 .plan-activity {
-    width: 200px; 
-    background-color: lightblue;
-    margin: 0px 10px; 
+    position: relative;
+    width: 180px;
+    height: 140px;
+    background-repeat: no-repeat;
+    display: block;
+    overflow: hidden;
+    padding: 0 10px;
+    margin: 0 10px 10px 0;
     float: left;
 }
 
-.title_on_timeline {
-    height: 62px; 
+.plan-activity.unscheduled:before {
+    font-family: 'Glyphicons Halflings';
+    content: "\e023";
+    position: absolute;
+    font-size: 60px;
+    color: #ddd;
+    top: 50%;
+    line-height: 1em;
+    margin-top: -30px;
+    left: 50%;
+    margin-left: -30px;
 }
 
-
-.plan-activity a {
-    width: 200px; 
+.plan-activity .time {
+    position: absolute;
+    bottom: 0px;
 }
 
-.plan-activity p {
-    padding: 10px; 
-    text-align: center; 
+.plan-activity .time,
+.plan-activity .title {
+    color: rgba(255,255,255,0.9);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.5);
 }
 
-.plan-activity img {
-    width: 200px; 
+.plan-activity:hover {
+    text-decoration: none;
 }
 
 .toggled {
@@ -155,17 +170,17 @@ body.index {
     background-size: cover;
 }
 
-
-
-.form-group {
-    width: 500px;
+@media all and (min-width: 750px) {
+    .calendar {
+        margin-top: 25px;
+    }
 }
 
-.calendar {
-    margin-top: 150px;
-    margin-left: 300px;
+.control-label {
+    font-weight: 400;
+    font-family: 'Molengo', sans-serif;
+    font-size: 16px;
 }
-
 
 #fb-face {
     margin-top: 15px;
@@ -181,6 +196,12 @@ body.index {
 .fb-button {
     margin-top: -60px;
 }
+
+.timeline-panel {
+    margin-bottom: 0px;
+}
+
+
 
 
 

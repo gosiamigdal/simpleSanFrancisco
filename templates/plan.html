@@ -1,36 +1,38 @@
 {% extends 'base.html' %}
 {% block body %}
-<h1>{{plan.name}}</h1>
-<p>Want to save your plan? Sign up!</p>
-<fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>
-<h3>{{plan.start_date|datetime('%B %d')}} to {{plan.end_date|datetime('%B %d, %Y')}}</h3>
+<div class="row">
+    <div class="col-md-9">
+        <h2>{{plan.name}}</h2>
+        <h3>{{plan.start_date|datetime('%B %d')}} to {{plan.end_date|datetime('%B %d, %Y')}}</h3>
+    </div>
+    <div class="col-md-3">
+        <p>Want to save your plan? Sign up!</p>
+        <fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>
+    </div>
+</div>
+
+
 {% for timeline, forecast in days %}
 <div class="panel panel-default">
-    <div class="panel-heading panel">{{timeline.date|datetime('%B %d')}} 
-    {% if forecast.icon == 'partly-cloudy-day' %}
-        <img src="/static/weather_icons/partly_cloudy_day.png" class="weather-icon">
-    {% elif forecast.icon == 'partly-cloudy-night' %}
-        <img src="/static/weather_icons/partly_cloudy_night.png" class="weather-icon">
-    {% elif forecast.icon == 'clear-night' %}
-        <img src="/static/weather_icons/clear_night.png" class="weather-icon">
-    {% elif forecast.icon == 'clear-day' %} 
-        <img src="/static/weather_icons/clear_day.png" class="weather-icon">
-    {% else %}
-        <img src="/static/weather_icons/do_not_know.png" class="weather-icon">
-    {% endif %}
-{{forecast.summary}} Max temperature: {{forecast.temperatureMax}} F</div>
+    <div class="panel-heading panel timeline-panel">
+        {{timeline.date|datetime('%B %d')}} 
+        <img src="/static/weather_icons/{{forecast.icon}}.png" class="weather-icon">
+        {{forecast.summary}} Max temperature: {{forecast.temperatureMax}} F
+    </div>
     <div class="panel-body">
-        <div class="plan-buttons btn-group">
+        <div class="plan-buttons">
             {% for order, time in timeslots.iteritems() %}
-                <div class="plan-activity">
-                    <a href="{{url_for("categories_for_timeslot", plan_id=plan.id, day=timeline.id, order=order)}}" class="btn btn-default a-10am">{{time}}</a>
-                    {% if (timeline.id, order) in activities_by_timeslot %}
-                        {% set activity = activities_by_timeslot[(timeline.id, order)] %}
-                            <div class="title_on_timeline"><p>{{activity.activity.title}}</p></div>
-                            <img src="/static/images/{{activity.activity.photo_url}}"/>
-
-                    {% endif %}
-                </div>
+                {% if (timeline.id, order) in activities_by_timeslot %}
+                    {% set activity = activities_by_timeslot[(timeline.id, order)] %}
+                    <a href="{{url_for("categories_for_timeslot", plan_id=plan.id, day=timeline.id, order=order)}}" class="plan-activity" style="background-image: url('/static/images/{{activity.activity.photo_url}}')">
+                        <h2 class="time">{{time}}</h2>
+                        <h3 class="title">{{activity.activity.title}}</h3>
+                    </a>
+                {% else %}
+                    <a href="{{url_for("categories_for_timeslot", plan_id=plan.id, day=timeline.id, order=order)}}" class="plan-activity unscheduled">
+                        <h2 class="time">{{time}}</h2>
+                    </a>
+                {% endif %}
             {% endfor %}
         </div>
     </div>
