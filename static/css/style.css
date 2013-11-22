@@ -1,5 +1,8 @@
 .brand-name {
-    font-weight: bold;
+    font-weight: 400;
+    font-size: 1.4em;
+    line-height: 1em;
+    font-family: 'Lobster', cursive;
 }
 
 .upper-navbar {
@@ -7,21 +10,31 @@
     background-color: #f8f8f8;
 }
 
-#footer {
-   bottom:0;
-   width:100%;
-   height: 50px;   
-   background: #e7e7e7;
-   text-align: left;
-    position: fixed;
-    bottom: 0;
-    left:0
+
+.hero h1 {
+    font-weight: 400;
+    font-family: 'Lobster', cursive;
 }
 
+.hero h3,
+.hero a {
+    font-weight: 400;
+    font-family: 'Molengo', sans-serif;
+}
 
-.aboutme {
-    margin-right: 200px;
-    color: #5e5e5e;
+.hero a {
+    background-color: #e1502f;
+    color: white;
+    float: right;
+}
+
+.hero a:hover {
+   background-color: #86322a;
+   color: white; 
+}
+
+.hero h3 {
+    margin-bottom: 20px;
 }
 
 
@@ -137,40 +150,11 @@
     margin: 0px 8px;
 }
 
-
-.photo-background {
-    background: url("/static/background/best_golden_gate.jpg") no-repeat center center fixed; 
+body.index {
+    background: url("/static/background/golden-gate-bridge-reduced.jpg") no-repeat center center fixed; 
     background-size: cover;
 }
 
-.first-button {
-    border: 1px solid transparent;
-    background-color: #e7e7e7;
-    margin: -2px 190px;
-    color: #5e5e5e;
-}
-
-
-.very-main-title {
-    font-size: 55px; 
-    font-weight: bold;
-}
-
-.main-title {
-    font-size: 20px; 
-    margin-left: 100px;
-}
-
-.titles {
-    width: 650px;
-    margin-bottom: 20px;
-}
-
-.main-content-first {
-    margin-top: 70px;
-    width: 650px;
-    margin-left: 530px;
-}
 
 
 .form-group {
@@ -197,11 +181,6 @@
 .fb-button {
     margin-top: -60px;
 }
-
-
-
-
-
 
 
 

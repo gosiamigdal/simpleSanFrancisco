@@ -8,7 +8,7 @@ from models import db
 import datetime
 import forecastio
 from app import app, admin, AuthenticatedModelView
-
+import re
 
 
 
@@ -18,6 +18,7 @@ lng = -122.442112
 
 timeslots = {0:"10am", 1:"12pm", 2:"2pm", 3:"4pm",4:"6pm"}
 
+@app.template_filter('datetime')
 def format_datetime(date, fmt='%c'):
     # check whether the value is a datetime object
     if not isinstance(date, (datetime.date, datetime.datetime)):
@@ -27,7 +28,12 @@ def format_datetime(date, fmt='%c'):
             return date
     return date.strftime(fmt)
 
-app.jinja_env.filters['datetime'] = format_datetime
+@app.template_filter('quoted')
+def quoted(s):
+    l = re.findall('\'([^\'\.]*).+\'', str(s))
+    if l:
+        return l[0]
+    return None
 
 # Stuff to make login easier
 login_manager = LoginManager()
