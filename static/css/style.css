@@ -168,7 +168,6 @@ h2, h3,
 .add-button {
     margin-left: 22px; 
     margin-bottom: 14px;
-    margin-top: 20px;
     display: inline;
 }
 
@@ -186,6 +185,7 @@ h2, h3,
 
 .lead-dv {
     min-width: 349px;
+    margin-bottom: 35px;
     display: inline-block;
 }
 
@@ -265,11 +265,16 @@ h4 {
     margin-top: 15px;
 }
 
+.create-plan:hover {
+    background-color: #66E275;
+}
+
 
 .description {
     text-align:justify;
     text-justify:inter-word;
     font-size: 15px;
+    margin-top: -12px;
 }
 
 .nav {
@@ -289,7 +294,9 @@ h4 {
     margin-top: 30px;
 }
 
-
+.days-travel {
+    margin-bottom: 30px;
+}
 
 
 
