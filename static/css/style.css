@@ -233,8 +233,13 @@ body.index {
 }
 
 
-.create-plan {
-    margin-top: 20px; 
+h4 {
+    font-weight: 400;
+    font-family: 'Molengo', sans-serif;
+}
+
+.plan-activity {
+    border-radius: 10px;
 }
 
 

@@ -6,11 +6,10 @@
         <h3>{{plan.start_date|datetime('%B %d')}} to {{plan.end_date|datetime('%B %d, %Y')}}</h3>
     </div>
     <div class="col-md-3">
-        <p>Want to save your plan? Sign up!</p>
+        <h4>Want to save your plan? Sign up!</h4>
         <fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>
     </div>
 </div>
-
 
 {% for timeline, forecast in days %}
 <div class="panel panel-default row">
