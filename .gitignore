@@ -4,3 +4,4 @@ env
 *.db
 backup
 .DS_Store
+libpeerconnection.log
