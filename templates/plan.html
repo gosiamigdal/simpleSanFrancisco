@@ -2,7 +2,10 @@
 {% block body %}
 <div class="row">
     <div class="col-md-9">
-        <h2>{{plan.name}}</h2>
+
+        <div class="brand-name">
+            <h1>{{plan.name}}</h1>
+        </div>
         <h3>{{plan.start_date|datetime('%B %d')}} to {{plan.end_date|datetime('%B %d, %Y')}}</h3>
     </div>
     <div class="col-md-3">

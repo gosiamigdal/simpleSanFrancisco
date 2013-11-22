@@ -3,6 +3,7 @@
     font-size: 1.4em;
     line-height: 1em;
     font-family: 'Lobster', cursive;
+    margin-right: 12px;
 }
 
 .upper-navbar {
@@ -50,7 +51,7 @@ h2, h3,
     display: block;
     overflow: hidden;
     padding: 0 10px;
-    margin: 0 10px 10px 0;
+    margin: 0 20px 10px 27px;
     float: left;
 }
 
@@ -60,7 +61,7 @@ h2, h3,
     position: absolute;
     font-size: 60px;
     color: #ddd;
-    top: 50%;
+    top: 35%;
     line-height: 1em;
     margin-top: -30px;
     left: 50%;
@@ -155,6 +156,7 @@ h2, h3,
 
 .turn_green:hover {
     background-color: #66E275;
+    border-radius: 8px;
 }
 
 .mouse_down {
@@ -260,12 +262,22 @@ h4 {
     font-size: 15px;
 }
 
+.nav {
+    font-size: 18px;
+}
+
+.panel-default {
+    margin-top: 15px;
+}
+
+.categories {
+    margin-bottom: 25px;
+}
 
 
-
-
-
-
+.category-image {
+    margin-top: 30px;
+}
 
 
 
