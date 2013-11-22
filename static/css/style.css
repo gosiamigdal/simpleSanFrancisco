@@ -108,6 +108,16 @@ h2, h3,
     color: #333;
 }
 
+.category-button {
+    height: 170px;
+    text-align: center;
+    color: #666;
+}
+
+.category-button:hover {
+    text-decoration: none;
+}
+
 .separate-button {
     font-size: 21px; 
     text-align: center;
