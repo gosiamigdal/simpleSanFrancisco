@@ -170,9 +170,10 @@ h2, h3,
     font-size: 20px; 
 }
 
+
 .weather-icon {
     width: 40px; 
-    margin: 0px 8px;
+    margin: 0px 18px;
 }
 
 body.index {
@@ -207,9 +208,37 @@ body.index {
     margin-top: -60px;
 }
 
+
 .timeline-panel {
     margin-bottom: 0px;
 }
+
+
+.timeline-panel .time {
+    display: inline;
+    font-weight: 400;
+    font-family: 'Molengo', sans-serif;
+}
+
+
+.timeline-panel .weather-icon {
+    display: inline;
+}
+
+
+.timeline-panel .forecast{
+    display: inline;
+    font-weight: 400;
+    font-family: 'Molengo', sans-serif;
+}
+
+
+.create-plan {
+    margin-top: 20px; 
+}
+
+
+
 
 
 

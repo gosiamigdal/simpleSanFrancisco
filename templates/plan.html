@@ -13,11 +13,11 @@
 
 
 {% for timeline, forecast in days %}
-<div class="panel panel-default">
+<div class="panel panel-default row">
     <div class="panel-heading panel timeline-panel">
-        {{timeline.date|datetime('%B %d')}} 
+        <h4 class="time">{{timeline.date|datetime('%B %d')}}</h4> 
         <img src="/static/weather_icons/{{forecast.icon}}.png" class="weather-icon">
-        {{forecast.summary}} Max temperature: {{forecast.temperatureMax}} F
+        <h4 class="forecast">{{forecast.summary}} Maximum temperature: {{forecast.temperatureMax}} F</h4>
     </div>
     <div class="panel-body">
         <div class="plan-buttons">
