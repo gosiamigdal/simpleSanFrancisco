@@ -5,3 +5,4 @@ env
 backup
 .DS_Store
 libpeerconnection.log
+fb_config.py

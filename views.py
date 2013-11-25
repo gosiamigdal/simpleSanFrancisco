@@ -4,11 +4,13 @@ from flask.ext.login import LoginManager, login_required, login_user, current_us
 from flaskext.markdown import Markdown
 import config
 import forms
+import requests
 from models import db
 import datetime
 import forecastio
 from app import app, admin, AuthenticatedModelView
 import re
+from fb_config import * 
 api_key = "a313c0308a8c82e645559fdee426930a"
 lat = 37.761169
 lng = -122.442112
@@ -121,6 +123,12 @@ def create_plan():
 def signup_or_login():
     fb_id = request.form["fbId"]
     access_token = request.form["fbAccessToken"]
+    r = requests.get("https://graph.facebook.com/debug_token", params={
+        "input_token": access_token,
+        "access_token": "%s|%s" % (FB_APP_ID, FB_SECRET)})
+    response = r.json()["data"]
+    if (not response["is_valid"]) or (str(response["user_id"]) != fb_id):
+        return "Don't cheat!"
     existing_user = User.query.filter_by(fb_id=fb_id).first()
     if current_user.is_authenticated():
         user_id = current_user.get_id()
