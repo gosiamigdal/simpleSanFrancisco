@@ -76,8 +76,13 @@ def forecast_for_day(day):
 
 
 @app.route("/plan/<int:id>")
+@login_required
 def view_plan(id):
     plan = Plan.query.get(id)
+    if str(plan.user_id) != current_user.get_id():
+        flash("Don't be evil! Access your plans only!")
+        return redirect(url_for("index"))
+
     timelines = plan.timelines
     timeline_activities = TimelineActivity.query.join(Timeline).join(Plan).join(Activity).filter(Plan.id==id)
     activities_by_timeslot = {}
@@ -136,16 +141,20 @@ def signup_or_login():
     if current_user.is_authenticated():
         user_id = current_user.get_id()
         if existing_user:
+            # User already has account, but ask to connect to FB
+            # Merge two accounts. User has been there, merged and now wants to merge again
             login_user(existing_user)
             plans = Plan.query.join(User).filter(User.id==user_id).all()
             for plan in plans:
                 plan.user_id = existing_user.id
             db.session.commit()
         else:
+            # Connect FB to new account: user first time on site
             user = User.query.get(user_id)
             user.fb_id = fb_id
             db.session.commit()
-    else:        
+    else:       
+        # User already exists, just log in 
         login_user(existing_user)
         # TODO: What if not exist?
     return "Success"
@@ -153,27 +162,7 @@ def signup_or_login():
 
 @app.route("/login")
 def login():
-    return render_template("login.html")
-
-
-@app.route("/login", methods=["POST"])
-def authenticate():
-    form = forms.LoginForm(request.form)
-    if not form.validate():
-        flash("Incorrect username or password") 
-        return render_template("login.html")
-
-    email = form.email.data
-    password = form.password.data
-
-    user = User.query.filter_by(email=email).first()
-
-    if not user or not user.authenticate(password):
-        flash("Incorrect username or password") 
-        return render_template("login.html")
-
-    login_user(user)
-    return redirect(request.args.get("next", url_for("index")))
+    return redirect(url_for("index"))
 
 
 @app.route("/logout")
@@ -187,6 +176,10 @@ def logout():
 @login_required
 def see_summary(id):
     plan = Plan.query.get(id)
+    if str(plan.user_id) != current_user.get_id():
+        flash("Don't be evil! Access your plans only!")
+        return redirect(url_for("index"))
+
     return render_template("plan.html", plan=plan)
 
 
@@ -196,21 +189,37 @@ def see_summary(id):
 def activities_for_timeslot(plan_id, day, order, category_id):
     category = Category.query.get(category_id)
     plan = Plan.query.get(plan_id)
+    if str(plan.user_id) != current_user.get_id():
+        flash("Don't be evil! Access your plans only!")
+        return redirect(url_for("index"))
+
     activities = Activity.query.filter_by(category_id=category_id).all()
     return render_template("activities.html", category=category, plan=plan, order=order, day=day, timeslots=timeslots, activities=activities)
  
 
 
 @app.route("/plan/<int:plan_id>/time/<int:day>/<int:order>")
+@login_required
 def categories_for_timeslot(plan_id, day, order):
     categories = Category.query.all()
     plan = Plan.query.get(plan_id)
+    if str(plan.user_id) != current_user.get_id():
+        flash("Don't be evil! Access your plans only!")
+        return redirect(url_for("index"))
+
     return render_template("categories.html", categories=categories, plan=plan, order=order, day=day, timeslots=timeslots)
 
 
 @app.route("/plan/<int:plan_id>/time/<int:day>/<int:order>/category/<int:category_id>", methods=["POST"])
 @login_required
 def select_activity_for_timeslot(plan_id, day, order, category_id):
+    timeline = Timeline.query.join(Plan). \
+      filter(Plan.user_id == current_user.get_id()). \
+      filter(Plan.id == plan_id). \
+      filter(Timeline.id == day).first()
+    if not timeline:
+        flash("Don't try to cheat!")
+        return redirect(url_for("index"))
     activity_id = request.form["activity_id"]
     activity_in_db = TimelineActivity.query.filter_by(timeline_id=day, order=order).first()
     if activity_in_db == None:
