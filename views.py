@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request, g, session, url_for, flash
+from flask import Flask, render_template as flask_render_template, redirect, request, g, session, url_for, flash
 from models import User, Plan, Activity, Category, Timeline, TimelineActivity
 from flask.ext.login import LoginManager, login_required, login_user, current_user, logout_user
 from flaskext.markdown import Markdown
@@ -17,6 +17,10 @@ lng = -122.442112
 
 timeslots = {0:"10am", 1:"12pm", 2:"2pm", 3:"4pm",4:"6pm"}
 
+def render_template(template, **kwargs):
+    kwargs["FB_APP_ID"] = FB_APP_ID
+    kwargs["FB_DOMAIN"] = FB_DOMAIN
+    return flask_render_template(template, **kwargs)
 
 
 @app.template_filter('datetime')
