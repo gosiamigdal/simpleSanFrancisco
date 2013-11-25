@@ -179,8 +179,14 @@ def see_summary(id):
     if str(plan.user_id) != current_user.get_id():
         flash("Don't be evil! Access your plans only!")
         return redirect(url_for("index"))
-
-    return render_template("plan.html", plan=plan)
+    timelines = plan.timelines
+    timeline_activities = TimelineActivity.query.join(Timeline).join(Plan).join(Activity).filter(Plan.id==id)
+    activities_by_timeslot = {}
+    for activity in timeline_activities:
+        t_id = activity.timeline_id
+        activities_by_timeslot[(t_id, activity.order)] = activity
+    days = [(t, forecast_for_day(t.date)) for t in timelines]
+    return render_template("summary.html", plan=plan, days=days, timeslots=timeslots, activities_by_timeslot=activities_by_timeslot)
 
 
 

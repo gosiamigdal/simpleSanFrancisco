@@ -207,7 +207,9 @@ body.index {
     }
 }
 
-
+@media (max-width: 1200px) {
+    
+}
 
 .control-label {
     font-weight: 400;

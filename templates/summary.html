@@ -1,7 +1,24 @@
 {% extends 'base.html' %}
 {% block body %}
-<div>
-    <h1>{{plan.name}}</h1>
-    <h3>{{plan.start_date|datetime('%B %d')}} to {{plan.end_date|datetime('%B %d, %Y')}}</h3>
+{% for timeline, forecast in days %}
+<div class="panel panel-default row">
+    <div class="panel-heading panel timeline-panel">
+        <h4 class="time">{{timeline.date|datetime('%B %d')}}</h4> 
+                <img src="/static/weather_icons/{{forecast.icon}}.png" class="weather-icon">
+    </div>
+    <div class="panel-body">
+        <div class="plan-buttons">
+            {% for order, time in timeslots.iteritems() %}
+                {% if (timeline.id, order) in activities_by_timeslot %}
+                    {% set activity = activities_by_timeslot[(timeline.id, order)] %}
+                    <a href="{{activity.activity.website_url}}" class="plan-activity" style="background-image: url('/static/images/{{activity.activity.photo_url}}')" target="_blank">
+                        <h2 class="time">{{time}}</h2>
+                        <h3 class="title">{{activity.activity.title}}</h3>
+                    </a>
+                {% endif%}
+            {% endfor %}
+        </div>
+    </div>
 </div>
+{% endfor %}
 {% endblock %}
