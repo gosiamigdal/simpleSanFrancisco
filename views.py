@@ -11,7 +11,6 @@ import forecastio
 from app import app, admin, AuthenticatedModelView
 import re
 from fb_config import * 
-api_key = "a313c0308a8c82e645559fdee426930a"
 lat = 37.761169
 lng = -122.442112
 
@@ -70,7 +69,7 @@ def plans():
 
 
 def forecast_for_day(day):
-    forecast = forecastio.load_forecast(api_key, lat, lng, units="auto", time=day)
+    forecast = forecastio.load_forecast(FORECAST_SECRET, lat, lng, units="auto", time=day)
     return forecast.daily().data[0]
 
 
