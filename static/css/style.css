@@ -148,11 +148,12 @@ h2, h3,
     margin-top: 14px; 
 }
 
+/*
 .categories_together {
     max-width: 570px; 
     margin-left: 270px; 
 }
-
+*/
 
 .turn_green:hover {
     background-color: #66E275;

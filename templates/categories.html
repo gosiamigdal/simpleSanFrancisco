@@ -8,7 +8,7 @@
         <div class="categories"><h3>Categories for: {{timeslots[order]}}</h3></div>
         <div class="row">
             {% for category in categories %}
-                <a href="{{url_for("activities_for_timeslot", plan_id=plan.id, day=day, order=order,category_id=category.id)}}" class="category-button turn_green col-xs-4">
+                <a href="{{url_for("activities_for_timeslot", plan_id=plan.id, day=day, order=order,category_id=category.id)}}" class="category-button turn_green col-md-4 col-xs-12">
                     <h3>{{category.name}}</h3>
                     <div class="category-image"><img src="/static/icons/{{category.symbol_url}}"></div>
                 </a>
