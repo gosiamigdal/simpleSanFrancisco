@@ -120,6 +120,7 @@ def create_plan():
 @app.route("/signup_or_login", methods=["POST"])
 def signup_or_login():
     fb_id = request.form["fbId"]
+    access_token = request.form["fbAccessToken"]
     existing_user = User.query.filter_by(fb_id=fb_id).first()
     if current_user.is_authenticated():
         user_id = current_user.get_id()
