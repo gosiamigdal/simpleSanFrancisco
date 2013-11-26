@@ -160,6 +160,9 @@ h2, h3,
     border-radius: 8px;
 }
 
+.turn_green {
+    display: block;
+}
 
 .mouse_down {
     background-color: #5CA82A !important;
