@@ -316,7 +316,6 @@ img .google-link {
 }
 
 
-
 .hero {
     background-color: #e7e7e7;
 } 
@@ -328,3 +327,48 @@ img .google-link {
 }
 
 
+.post h1 {
+    margin-top: -60px;
+}
+
+.post a {
+    text-decoration: none;
+    color: black;
+    background-color: white;
+}
+
+.post .plan-name:hover {
+    text-decoration: none;
+}
+
+.post .plan-name {
+    margin-bottom: 30px;
+}
+
+.post .edit {
+    background-color: #317a90;
+    color: white;
+    margin-right: 15px;
+}
+
+.post .see-summary {
+    background-color: #317a90;
+    color: white;
+    margin-right: 30px;
+}
+
+
+
+
+
+
+
+
+.post .edit:hover {
+    background-color: #283648;
+}
+
+.post .see-summary:hover {
+    background-color: #283648;
+
+}
