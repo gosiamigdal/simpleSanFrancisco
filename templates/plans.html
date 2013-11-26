@@ -1,9 +1,18 @@
 {% extends 'base.html' %}
 {% block body %}
     {% for plan in plans %}
-        <div class="post">
-            <h2><a href="{{url_for("view_plan", id=plan.id)}}">{{plan.name}}</a></h2>
-            <h4><a href="{{url_for("see_summary", id=plan.id)}}">See summary</a></h4>
+    <div class="row">          
+        <div class="col-md-offset-0 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body hero">
+                    <div class="post">
+                        <h1>{{plan.name}}</h1>
+                        <h4><a href="{{url_for("view_plan", id=plan.id)}}">Edit</a></h4>
+                        <h4><a href="{{url_for("see_summary", id=plan.id)}}">See summary</a></h4>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
     {% endfor %}
 {% endblock %}
