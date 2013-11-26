@@ -30,9 +30,9 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right user-bar"
                        style="display: {% if current_user.is_authenticated() %} block {% else %} none {% endif %}">
+                        <li><span id="fb-face"></span></li>
                         <li><a href="{{url_for("plans")}}">My plans</a></li>
                         <li><a href="{{url_for("new_plan")}}">New plan</a></li>
-                        <li><span id="fb-face"></span></li>
                         <li><a class="logout" href="{{url_for("logout")}}">Logout</a></li>
                     </ul>               
             </nav>
