@@ -357,13 +357,6 @@ img .google-link {
     margin-right: 30px;
 }
 
-
-
-
-
-
-
-
 .post .edit:hover {
     background-color: #283648;
 }
@@ -371,4 +364,10 @@ img .google-link {
 .post .see-summary:hover {
     background-color: #283648;
 
+}
+
+
+.as {
+    margin-top: 35px;
+    margin-bottom: 35px;
 }
