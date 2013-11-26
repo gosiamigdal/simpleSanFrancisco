@@ -271,7 +271,7 @@ h4 {
 }
 
 .create-plan:hover {
-    background-color: #66E275;
+    background-color: #47a447;
 }
 
 
@@ -310,6 +310,10 @@ img .google-link {
 }
 
 
+
+.hero {
+    background-color: #e7e7e7;
+} 
 
 
 
