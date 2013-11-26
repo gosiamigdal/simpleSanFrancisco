@@ -78,7 +78,8 @@ class Activity(db.Model):
     description = Column(String(1500))
     category_id = Column(Integer, ForeignKey("categories.id"),nullable=False)
     website_url = Column(String(150))
-    
+    google_map_url = Column(String(150))
+
     category = relationship("Category")
 
     timeline_activities = relationship("TimelineActivity", uselist=True)

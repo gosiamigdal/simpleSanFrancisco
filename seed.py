@@ -17,7 +17,7 @@ def load_activities(session):
         activities = csv.reader(csvfile,delimiter="|")
         for activity in activities:
                 new_activity = Activity(title=activity[1], photo_url=activity[2], description=activity[3],
-                                        category_id=activity[4],website_url=activity[5])
+                                        category_id=activity[4],website_url=activity[5],google_map_url=activity[6])
                 print new_activity.title
                 print new_activity.category_id
                 session.add(new_activity)
