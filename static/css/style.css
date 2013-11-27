@@ -391,8 +391,15 @@ img .google-link {
     border-radius: 12px;
 }
 
+.icon img {
+    height: 35px;
+    width: 35px;
+    margin: 0px 2px;
+}
 
-
+.all-icons {
+    margin-top: 80px;
+}
 
 
 
