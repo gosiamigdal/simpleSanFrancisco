@@ -13,7 +13,15 @@
                     {% set activity = activities_by_timeslot[(timeline.id, order)] %}
                     <div class="row activity-summary">
                                 <div class="col-md-1">
-                                    <a href="{{activity.activity.google_map_url}}" target="_blank"><img class="google-link" src="/static/icons/glyphicons_242_google_maps@2x.png" style="height:40px;" class="weather-icon"></a>
+                                    <table>
+                                        <tr><td>
+                                            <a href="{{activity.activity.google_map_url}}" target="_blank"><img class="google-link" src="/static/icons/glyphicons_242_google_maps@2x.png" style="height:40px;" class="weather-icon">
+                                                <div class="tooltipcontainer">
+                                                    <div class="tooltip">Here some info</div>
+                                                </div>
+                                            </a>
+                                        </td></tr>
+                                    </table>
                                 </div>
                         <div class="col-md-3">
                                 <a href="{{activity.activity.website_url}}" class="plan-activity" style="background-image: url('/static/images/{{activity.activity.photo_url}}')" target="_blank">

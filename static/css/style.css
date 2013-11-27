@@ -386,6 +386,24 @@ img .google-link {
 
 
 
+/* Container is necessary because td cannot be positioned relative */
+.activity-summary td .tooltipcontainer {
+    position: relative;
+}
+
+.activity-summary td .tooltip {
+    display: none;
+    position: absolute;
+    height: 200px;
+    width: 300px;
+    color: black;
+    /* More positioning, heigh, width, etc */
+}
+
+.activity-summary td a:hover .tooltip {
+    display: block;
+}
+
 
 
 
