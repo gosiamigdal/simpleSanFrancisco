@@ -348,7 +348,8 @@ img .google-link {
 .post .edit {
     background-color: #317a90;
     color: white;
-    margin-right: 15px;
+    margin-right: 10px;
+    margin-bottom: 10px;
 }
 
 .post .see-summary {
