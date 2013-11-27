@@ -197,6 +197,7 @@ h2, h3,
 .weather-icon {
     width: 40px; 
     margin: 0px 18px;
+    height: 40px;
 }
 
 
@@ -383,6 +384,18 @@ img .google-link {
 .activity-summary {
     margin-bottom: 25px;
 }
+
+
+.portrait {
+    box-shadow: 10px 1px 40px rgba(0,0,0,0.4), 10px 0 40px rgba(0,0,0,0.4);
+    border-radius: 12px;
+}
+
+
+
+
+
+
 
 
 
