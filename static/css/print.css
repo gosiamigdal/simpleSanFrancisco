@@ -3,6 +3,10 @@
     height: 43px;
 }
 
+.plan-activity img {
+    float: right;
+}
+
 
 .google-link {
     width: 15px;
@@ -21,6 +25,8 @@
 
 .time {
     font-size: 25px;
+    display: inline;
+    margin-right: 25px;
 }
 
 

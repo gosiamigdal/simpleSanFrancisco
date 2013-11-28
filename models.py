@@ -26,6 +26,7 @@ class Plan(db.Model):
     start_date = Column(DateTime)
     end_date = Column(DateTime)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    hashed_url = Column(String(80))
 
     user = relationship("User",backref="plans")
     timelines = relationship("Timeline", uselist=True)
