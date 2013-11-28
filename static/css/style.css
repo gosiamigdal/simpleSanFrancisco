@@ -389,7 +389,12 @@ img .google-link {
 .portrait {
     box-shadow: 10px 1px 40px rgba(0,0,0,0.4), 10px 0 40px rgba(0,0,0,0.4);
     border-radius: 12px;
+    padding: 0px;
+    margin-bottom: 20px;
+    max-width: 130px;
+    max-height: 168px;
 }
+
 
 .icon img {
     height: 35px;
@@ -398,8 +403,18 @@ img .google-link {
 }
 
 .all-icons {
-    margin-top: 80px;
+    margin-top: 100px;
 }
+
+.descr-portrait {
+    margin-top: 30px;
+}
+
+.about-sfo {
+    padding-left: 50px;
+    text-align: justify;
+}
+
 
 
 
