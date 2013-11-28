@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block body %}
-<input type="text" value="http://{{FB_DOMAIN}}{{ url_for("see_guide", hash=plan.hashed_url) }}" />
 {% for timeline, forecast in days %}
 <div class="panel panel-default row">
     <div class="panel-heading panel timeline-panel">

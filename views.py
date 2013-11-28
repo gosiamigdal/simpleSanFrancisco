@@ -11,6 +11,7 @@ import forecastio
 from app import app, admin, AuthenticatedModelView
 import re
 from fb_config import * 
+from random import choice
 lat = 37.761169
 lng = -122.442112
 
@@ -33,7 +34,6 @@ def generate_hash():
         i = i + 1
     url = "".join(url)
     return url
-
 
 
 @app.template_filter('datetime')
@@ -108,6 +108,7 @@ def view_plan(id):
         t_id = activity.timeline_id
         activities_by_timeslot[(t_id, activity.order)] = activity
     days = [(t, forecast_for_day(t.date)) for t in timelines]
+
     return render_template("plan.html", plan=plan, days=days, timeslots=timeslots, activities_by_timeslot=activities_by_timeslot)
 
 
@@ -131,7 +132,8 @@ def create_plan():
         flash("Error, all fields are required")
         return render_template("new_plan.html")
 
-    plan = Plan(name=form.name.data, start_date=form.start_date.data, end_date=form.end_date.data)
+    url = generate_hash()
+    plan = Plan(name=form.name.data, start_date=form.start_date.data, end_date=form.end_date.data, hashed_url=url)
     current_user.plans.append(plan) 
 
     for day in plan.date_range():
@@ -205,6 +207,21 @@ def see_summary(id):
         activities_by_timeslot[(t_id, activity.order)] = activity
     days = [(t, forecast_for_day(t.date)) for t in timelines]
     return render_template("summary.html", plan=plan, days=days, timeslots=timeslots, activities_by_timeslot=activities_by_timeslot)
+
+
+
+@app.route("/guide/<string:hash>")
+def see_guide(hash):
+    plan = Plan.query.filter_by(hashed_url=hash).first()
+    # TODO: if not exist
+    timelines = plan.timelines
+    timeline_activities = TimelineActivity.query.join(Timeline).join(Plan).join(Activity).filter(Plan.id==plan.id)
+    activities_by_timeslot = {}
+    for activity in timeline_activities:
+        t_id = activity.timeline_id
+        activities_by_timeslot[(t_id, activity.order)] = activity
+    days = [(t, forecast_for_day(t.date)) for t in timelines]
+    return render_template("guide.html", plan=plan, days=days, timeslots=timeslots, activities_by_timeslot=activities_by_timeslot)
 
 
 
