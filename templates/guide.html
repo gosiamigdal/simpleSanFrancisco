@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block body %}
+<div class="plan-name-guide"><h1>{{plan.name}}</h1></div>
 {% for timeline, forecast in days %}
 <div class="panel panel-default row">
     <div class="panel-heading panel timeline-panel">

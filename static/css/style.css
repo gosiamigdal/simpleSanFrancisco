@@ -453,6 +453,15 @@ img .google-link {
 }
 
 
+.plan-name-guide {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+
+
+
+
 /* Container is necessary because td cannot be positioned relative */
 .activity-summary td .tooltipcontainer {
     position: relative;
