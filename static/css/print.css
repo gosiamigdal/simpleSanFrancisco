@@ -1,0 +1,31 @@
+.weather-icon {
+    width: 43px;
+    height: 43px;
+}
+
+
+.google-link {
+    width: 15px;
+    height: 25px;
+    margin-bottom: 18px;
+}
+
+.summary-description {
+    text-align: justify;
+    margin-bottom: 50px;
+}
+
+.plan-activity {
+    font-size: 19px;
+}
+
+.time {
+    font-size: 25px;
+}
+
+
+.print-only {
+    display: block;
+    width: 126px;
+    height: 98px;
+}

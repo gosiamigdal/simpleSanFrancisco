@@ -403,7 +403,8 @@ img .google-link {
 }
 
 .all-icons {
-    margin-top: 100px;
+    margin-top: 60px;
+    margin-bottom: 30px;
 }
 
 .descr-portrait {
@@ -416,6 +417,18 @@ img .google-link {
 }
 
 
+.hackbright {
+    color: black;
+    font-weight: bold;
+}
+
+.hackbright:hover {
+    color: black;
+}
+
+@media screen {
+    .print-only { display: none; width: 10px; height: 10px; border-radius: 10px;}
+}
 
 
 

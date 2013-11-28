@@ -12,22 +12,23 @@
                 {% if (timeline.id, order) in activities_by_timeslot %}
                     {% set activity = activities_by_timeslot[(timeline.id, order)] %}
                     <div class="row activity-summary">
-                                <div class="col-md-1">
-                                    <table>
-                                        <tr><td>
-                                            <a href="{{activity.activity.google_map_url}}" target="_blank"><img class="google-link" src="/static/icons/glyphicons_242_google_maps@2x.png" class="weather-icon">
-                                                <div class="tooltipcontainer">
-                                                    <div class="tooltip">Here some info</div>
-                                                </div>
-                                            </a>
-                                        </td></tr>
-                                    </table>
-                                </div>
+                        <div class="col-md-1">
+                            <table>
+                                <tr><td>
+                                    <a href="{{activity.activity.google_map_url}}" target="_blank"><img class="google-link" src="/static/icons/glyphicons_242_google_maps@2x.png" class="weather-icon">
+                                        <div class="tooltipcontainer">
+                                            <div class="tooltip">Here some info</div>
+                                        </div>
+                                    </a>
+                                </td></tr>
+                            </table>
+                        </div>
                         <div class="col-md-3">
-                                <a href="{{activity.activity.website_url}}" class="plan-activity" style="background-image: url('/static/images/{{activity.activity.photo_url}}')" target="_blank">
+                            <a href="{{activity.activity.website_url}}" class="plan-activity" style="background-image: url('/static/images/{{activity.activity.photo_url}}')" target="_blank">
+                                <img src="/static/images/{{activity.activity.photo_url}}" class="print-only" />
                                 <h2 class="time">{{time}}</h2>
                                 <h3 class="title">{{activity.activity.title}}</h3>
-                                </a>
+                            </a>
                         </div>
                         <div class="col-md-8 summary-description">
                             <h4>{{activity.activity.description}}</h4>
