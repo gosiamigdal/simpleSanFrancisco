@@ -430,8 +430,27 @@ img .google-link {
     .print-only { display: none; width: 10px; height: 10px; border-radius: 10px;}
 }
 
+.plan-name-summary {
+    margin-top: -10px;
+    margin-bottom: 8px;
+}
 
+.hashed-link {
+    margin-top: 18px;
+    margin-right: -20px;
+}
 
+.index-page {
+    text-align: justify;
+}
+
+.text-area {
+    border-radius: 6px;
+}
+
+.send-plan {
+    margin-top: 5px;
+}
 
 
 /* Container is necessary because td cannot be positioned relative */

@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 {% block body %}
-<input type="text" value="http://{{FB_DOMAIN}}{{ url_for("see_guide", hash=plan.hashed_url) }}" />
+<div class="row">
+    <div class="col-md-7 plan-name-summary"><h1>{{plan.name}}</h1></div>
+    <div class="hashed-link col-md-3"><input class="text-area" type="text" size="30" value="http://{{FB_DOMAIN}}{{ url_for("see_guide", hash=plan.hashed_url) }}" /></div>
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-default create-plan send-plan">Copy link and send <br>guide to you friends!</button>
+    </div>
+</div>
+
+
 {% for timeline, forecast in days %}
 <div class="panel panel-default row">
     <div class="panel-heading panel timeline-panel">
