@@ -22,6 +22,20 @@ def render_template(template, **kwargs):
     return flask_render_template(template, **kwargs)
 
 
+def generate_hash():
+    items = ["0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f","g","h","i","j","k","l","m",
+    "n","o","p","q","r","s","t","u","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M",
+    "N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+    url = []
+    i = 0
+    while i < 16:
+        url.append(choice(items))
+        i = i + 1
+    url = "".join(url)
+    return url
+
+
+
 @app.template_filter('datetime')
 def format_datetime(date, fmt='%c'):
     # check whether the value is a datetime object
