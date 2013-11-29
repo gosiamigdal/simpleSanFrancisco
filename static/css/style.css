@@ -347,18 +347,6 @@ img .google-link {
     margin-bottom: 30px;
 }
 
-.post .edit {
-    background-color: #317a90;
-    color: white;
-    margin-right: 10px;
-    margin-bottom: 10px;
-}
-
-.post .see-summary {
-    background-color: #317a90;
-    color: white;
-    margin-right: 30px;
-}
 
 .post .edit:hover {
     background-color: #283648;
@@ -366,8 +354,44 @@ img .google-link {
 
 .post .see-summary:hover {
     background-color: #283648;
-
 }
+
+
+.post .edit {
+    background-color: #317a90;
+    color: white;
+}
+
+.post .see-summary {
+    background-color: #317a90;
+    color: white;
+    margin-right: 15px;
+}
+
+
+@media (min-width: @screen-sm-min) {
+    .post .edit {
+        background-color: #317a90;
+        color: white;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+
+    .post .see-summary {
+        background-color: #317a90;
+        color: white;
+        margin-right: 30px;
+    }
+    .post .edit:hover {
+        background-color: #283648;
+    }
+
+    .post .see-summary:hover {
+        background-color: #283648;
+
+    }
+}
+
 
 
 .as {
