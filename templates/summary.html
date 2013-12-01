@@ -10,10 +10,10 @@
         <button type="submit" class="btn btn-default create-plan send-plan">Copy link and send <br>guide to you friends!</button>
     </div>
 </div>
-<a href="https://twitter.com/share" class="twitter-share-button" target="_blank" data-url="{{public_url}}" data-size="large">Tweet</a>
+<div class="twitter-share"><a href="https://twitter.com/share" class="twitter-share-button" target="_blank" data-url="{{public_url}}" data-size="large">Tweet</a></div>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 </script>
-<fb:share-button href="http://onet.pl" width="300" type="button_count"></fb:share-button>
+<div class="fb-share"><fb:share-button href="http://onet.pl" width="800" type="button_count"></fb:share-button></div>
 {% for timeline, forecast in days %}
 <div class="panel panel-default row">
     <div class="panel-heading panel timeline-panel">
@@ -29,7 +29,7 @@
                         <div class="col-md-1">
                             <table>
                                 <tr><td>
-                                    <a href="{{activity.activity.google_map_url}}" target="_blank"><img class="google-link" src="/static/icons/glyphicons_242_google_maps@2x.png" class="weather-icon">
+                                    <a href="{{activity.activity.google_map_url}}" target="_blank"><img class="google-link" src="/static/icons/glyphicons_242_google_maps@2x.png" class="weather-icon" title="See on GoogleMap!">
                                         <div class="tooltipcontainer">
                                             <div class="tooltip">Here some info</div>
                                         </div>
