@@ -96,3 +96,16 @@ class Category(db.Model):
     symbol_url = Column(String(120))
 
     activities = relationship("Activity", uselist=True) 
+
+
+
+
+class WeatherCache(db.Model):
+    __tablename__ = "weather_cache"
+
+    id = Column(Integer, primary_key=True)
+    weather = Column(String(1024))
+    update_time = Column(DateTime)
+
+
+    

@@ -1,5 +1,5 @@
 from flask import Flask, render_template as flask_render_template, redirect, request, g, session, url_for, flash
-from models import User, Plan, Activity, Category, Timeline, TimelineActivity
+from models import User, Plan, Activity, Category, Timeline, TimelineActivity, WeatherCache
 from flask.ext.login import LoginManager, login_required, login_user, current_user, logout_user
 from flaskext.markdown import Markdown
 import config
@@ -7,6 +7,8 @@ import forms
 import requests
 from models import db
 import datetime
+import calendar
+import json
 import forecastio
 from app import app, admin, AuthenticatedModelView
 import re
@@ -87,10 +89,21 @@ def plans():
 
 
 def forecast_for_day(day):
-    forecast = forecastio.load_forecast(FORECAST_SECRET, lat, lng, units="auto", time=day)
-    return forecast.daily().data[0]
-
-
+    now = datetime.datetime.now()
+    day_since_epoch = calendar.timegm(day.utctimetuple()) / 60 / 60 / 24
+    weather_cache = WeatherCache.query.get(day_since_epoch)
+    if weather_cache == None:
+        print "Loading from API", day_since_epoch
+        forecast = forecastio.load_forecast(FORECAST_SECRET, lat, lng, units="auto", time=day)
+        daily_weather = forecast.daily().data[0]
+        cache = WeatherCache(id=day_since_epoch, weather=json.dumps(forecast.json["daily"]["data"][0]), update_time=now)
+        db.session.add(cache)
+        db.session.commit()
+        return daily_weather
+    else:
+        print "Loading from cache", day_since_epoch
+        parsed = json.loads(weather_cache.weather)
+        return forecastio.models.ForecastioDataPoint(parsed)
 
 
 @app.route("/plan/<int:id>")
