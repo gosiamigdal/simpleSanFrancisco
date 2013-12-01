@@ -101,9 +101,18 @@ def forecast_for_day(day):
         db.session.commit()
         return daily_weather
     else:
-        print "Loading from cache", day_since_epoch
-        parsed = json.loads(weather_cache.weather)
-        return forecastio.models.ForecastioDataPoint(parsed)
+        if weather_cache.update_time + datetime.timedelta(days=1) < now and now <= day:
+            print "Updating cache", day_since_epoch
+            forecast = forecastio.load_forecast(FORECAST_SECRET, lat, lng, units="auto", time=day)
+            daily_weather = forecast.daily().data[0]
+            weather_cache.weather = json.dumps(forecast.json["daily"]["data"][0])
+            weather_cache.update_time = now
+            db.session.commit()
+            return daily_weather
+        else:
+            print "Loading from cache", day_since_epoch
+            parsed = json.loads(weather_cache.weather)
+            return forecastio.models.ForecastioDataPoint(parsed)
 
 
 @app.route("/plan/<int:id>")
