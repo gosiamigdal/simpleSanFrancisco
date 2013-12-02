@@ -1,13 +1,10 @@
 {% extends 'base.html' %}
 {% block body %}
 {% set public_url = "http://" + FB_DOMAIN + url_for("see_guide", hash=plan.hashed_url) %}
-
-
 <div class="row">
-    <div class="col-md-7 plan-name-summary"><h1>{{plan.name}}</h1></div>
-    <div class="hashed-link col-md-3"><input class="text-area" type="text" size="30" value="{{public_url}}" /></div>
+    <div class="col-md-10 plan-name-summary"><h1>{{plan.name}}</h1></div>
     <div class="col-md-2">
-        <button type="submit" class="btn btn-default create-plan send-plan">Copy link and send <br>guide to you friends!</button>
+        <button type="submit" class="btn btn-default create-plan send-plan" onclick="window.prompt('Copy to clipboard: Ctrl+C, Enter', '{{public_url}}')">Copy link and send <br>guide to you friends!</button>
     </div>
 </div>
 <div class="twitter-share"><a href="https://twitter.com/share" class="twitter-share-button" target="_blank" data-url="{{public_url}}" data-size="large">Tweet</a></div>
