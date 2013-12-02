@@ -154,8 +154,16 @@ def create_plan():
         flash("Error, all fields are required")
         return render_template("new_plan.html")
 
+    if form.end_date.data < form.start_date.data:
+        flash("Error, end date can't be earlier than start date")
+        return render_template("new_plan.html")
+
     url = generate_hash()
     plan = Plan(name=form.name.data, start_date=form.start_date.data, end_date=form.end_date.data, hashed_url=url)
+    if len(plan.date_range()) > 14:
+        flash("Error, this trip is too log. You can choose maximum 14 days")
+        return render_template("new_plan.html")
+        
     current_user.plans.append(plan) 
 
     for day in plan.date_range():
