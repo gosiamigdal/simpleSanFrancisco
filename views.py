@@ -163,7 +163,7 @@ def create_plan():
     if len(plan.date_range()) > 14:
         flash("Error, this trip is too log. You can choose maximum 14 days")
         return render_template("new_plan.html")
-        
+
     current_user.plans.append(plan) 
 
     for day in plan.date_range():
@@ -243,7 +243,6 @@ def see_summary(id):
 @app.route("/guide/<string:hash>")
 def see_guide(hash):
     plan = Plan.query.filter_by(hashed_url=hash).first()
-    # TODO: if not exist
     timelines = plan.timelines
     timeline_activities = TimelineActivity.query.join(Timeline).join(Plan).join(Activity).filter(Plan.id==plan.id)
     activities_by_timeslot = {}
