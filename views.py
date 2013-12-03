@@ -93,7 +93,7 @@ def forecast_for_day(day):
     weather_cache = WeatherCache.query.get(day_since_epoch)
     if weather_cache == None:
         print "Loading from API", day_since_epoch
-        forecast = forecastio.load_forecast(FORECAST_SECRET, lat, lng, units="auto", time=day)
+        forecast = forecastio.load_forecast(config.FORECAST_SECRET, lat, lng, units="auto", time=day)
         daily_weather = forecast.daily().data[0]
         cache = WeatherCache(id=day_since_epoch, weather=json.dumps(forecast.json["daily"]["data"][0]), update_time=now)
         db.session.add(cache)
@@ -102,7 +102,7 @@ def forecast_for_day(day):
     else:
         if weather_cache.update_time + datetime.timedelta(days=1) < now and now <= day:
             print "Updating cache", day_since_epoch
-            forecast = forecastio.load_forecast(FORECAST_SECRET, lat, lng, units="auto", time=day)
+            forecast = forecastio.load_forecast(config.FORECAST_SECRET, lat, lng, units="auto", time=day)
             daily_weather = forecast.daily().data[0]
             weather_cache.weather = json.dumps(forecast.json["daily"]["data"][0])
             weather_cache.update_time = now
@@ -182,7 +182,7 @@ def signup_or_login():
     access_token = request.form["fbAccessToken"]
     r = requests.get("https://graph.facebook.com/debug_token", params={
         "input_token": access_token,
-        "access_token": "%s|%s" % (FB_APP_ID, config.FB_SECRET)})
+        "access_token": "%s|%s" % (config.FB_APP_ID, config.FB_SECRET)})
     response = r.json()["data"]
     if (not response["is_valid"]) or (str(response["user_id"]) != fb_id):
         return "Don't cheat!"
@@ -205,7 +205,6 @@ def signup_or_login():
     else:       
         # User already exists, just log in 
         login_user(existing_user)
-        # TODO: What if not exist?
     return "Success"
 
 
