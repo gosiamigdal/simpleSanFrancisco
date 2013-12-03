@@ -10,13 +10,13 @@ import datetime
 import calendar
 import json
 import forecastio
-from app import app, admin, AuthenticatedModelView
+from app import application, admin, AuthenticatedModelView
 import re
 from random import choice
 lat = 37.761169
 lng = -122.442112
 
-application = app
+app = application
 
 timeslots = {0:"10am", 1:"12pm", 2:"2pm", 3:"4pm",4:"6pm"}
 
