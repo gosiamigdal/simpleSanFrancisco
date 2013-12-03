@@ -16,6 +16,8 @@ from random import choice
 lat = 37.761169
 lng = -122.442112
 
+application = app
+
 timeslots = {0:"10am", 1:"12pm", 2:"2pm", 3:"4pm",4:"6pm"}
 
 def render_template(template, **kwargs):
