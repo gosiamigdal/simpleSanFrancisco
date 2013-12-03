@@ -10,7 +10,7 @@
 <div class="twitter-share"><a href="https://twitter.com/share" class="twitter-share-button" target="_blank" data-url="{{public_url}}" data-size="large">Tweet</a></div>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 </script>
-<div class="fb-share"><fb:share-button href="http://onet.pl" width="800" type="button_count"></fb:share-button></div>
+<div class="fb-share"><fb:share-button href="{{public_url}}" width="800" type="button_count"></fb:share-button></div>
 {% for timeline, forecast in days %}
 <div class="panel panel-default row">
     <div class="panel-heading panel timeline-panel">
