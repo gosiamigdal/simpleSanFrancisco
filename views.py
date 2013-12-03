@@ -12,7 +12,6 @@ import json
 import forecastio
 from app import app, admin, AuthenticatedModelView
 import re
-from fb_config import * 
 from random import choice
 lat = 37.761169
 lng = -122.442112
@@ -20,8 +19,8 @@ lng = -122.442112
 timeslots = {0:"10am", 1:"12pm", 2:"2pm", 3:"4pm",4:"6pm"}
 
 def render_template(template, **kwargs):
-    kwargs["FB_APP_ID"] = FB_APP_ID
-    kwargs["FB_DOMAIN"] = FB_DOMAIN
+    kwargs["FB_APP_ID"] = config.FB_APP_ID
+    kwargs["FB_DOMAIN"] = config.FB_DOMAIN
     return flask_render_template(template, **kwargs)
 
 
@@ -183,7 +182,7 @@ def signup_or_login():
     access_token = request.form["fbAccessToken"]
     r = requests.get("https://graph.facebook.com/debug_token", params={
         "input_token": access_token,
-        "access_token": "%s|%s" % (FB_APP_ID, FB_SECRET)})
+        "access_token": "%s|%s" % (FB_APP_ID, config.FB_SECRET)})
     response = r.json()["data"]
     if (not response["is_valid"]) or (str(response["user_id"]) != fb_id):
         return "Don't cheat!"

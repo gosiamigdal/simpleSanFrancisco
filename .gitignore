@@ -7,3 +7,4 @@ backup
 libpeerconnection.log
 fb_config.py
 fb_config_prod.py
+.elasticbeanstalk/
