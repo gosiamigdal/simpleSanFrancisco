@@ -148,12 +148,6 @@ h2, h3,
     margin-top: 14px; 
 }
 
-/*
-.categories_together {
-    max-width: 570px; 
-    margin-left: 270px; 
-}
-*/
 
 .turn_green:hover {
     background-color: #66E275;
@@ -212,7 +206,7 @@ body.plans {
 }
 
 
-@media all and (min-width: 750px) {
+@media (min-width: 750px) {
     .calendar {
         margin-top: 25px;
     }
@@ -494,7 +488,7 @@ img .google-link {
     margin-top: 220px;
 }
 
-.twitter-share{
+.twitter-share {
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -502,23 +496,7 @@ img .google-link {
 
 
 
-/* Container is necessary because td cannot be positioned relative */
-.activity-summary td .tooltipcontainer {
-    position: relative;
-}
 
-.activity-summary td .tooltip {
-    display: none;
-    position: absolute;
-    height: 200px;
-    width: 300px;
-    color: black;
-    /* More positioning, heigh, width, etc */
-}
-
-.activity-summary td a:hover .tooltip {
-    display: block;
-}
 
 
 
